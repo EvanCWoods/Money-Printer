@@ -1,0 +1,7 @@
+.icon-container {
+    display: flex;
+    justify-content: center;
+}
+.icon-container i {
+    font-size: 2.5rem;
+}
