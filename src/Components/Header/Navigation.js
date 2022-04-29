@@ -5,9 +5,9 @@ import "../../Assets/Styles/Header/navigation.css";
 function Navigation() {
     return (
         <div className="navigation-container">
-            <Link to="/">Home</Link>
-            <Link to="/">placeholder</Link>
-            <Link to="/">placeholder</Link>
+            <Link className="nav-link" to="/">Home</Link>
+            <Link className="nav-link" to="/">placeholder</Link>
+            <Link className="nav-link" to="/">placeholder</Link>
         </div>
     );
 }
