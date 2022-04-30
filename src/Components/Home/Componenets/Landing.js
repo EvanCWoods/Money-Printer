@@ -9,7 +9,7 @@ function Landing() {
                     <h1 className="landing-title">Welcome to the future of finance</h1>
                 </div>
             </div>
-            <div className="angle-bottom"></div>
+            <div className="angle-bottom"><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br></div>
         </div>
     );
 }

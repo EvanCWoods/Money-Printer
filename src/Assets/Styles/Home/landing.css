@@ -1,23 +1,20 @@
 .landing-content {
     display: flex;
     padding-top: 7%;
-    padding-bottom: 5%;
     background: var(--purple);
+    z-index: 1;
 }
 .landing-left {
     width: 35%;
     margin-left: 15%;
     color: white;
     font-size: 1.3rem;
+    z-index: 1;
 }
 
-.landing-right {
-    width: 40%;
-    margin: 0 5%;
-    background: white;
-    border: 1px solid var(--purple);
-    color: var(--purple);
-    padding: 3%;
-    position: relative;
-    bottom: -100px;
+.angle-bottom {
+    background: var(--purple);
+    margin-top: -5%;
+    z-index: -1;
+    transform: skewY(-4deg);
 }
