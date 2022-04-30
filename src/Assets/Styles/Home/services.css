@@ -1,0 +1,45 @@
+.services-container {
+    margin-top: 20%;
+}
+.services-title {
+    margin-left: 10%;
+    font-size: 2.2rem;
+}
+
+.services-boxes-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.purple {
+    background: var(--purple);
+}
+.red {
+    background: var(--red);
+}
+.service-box-container {
+    padding: 3%;
+}
+.service-box {
+    aspect-ratio: 1/0.75;
+    width: 300px;
+    padding: 3%;
+    color: white;
+}
+.service-box-title {
+    margin: 5% 0;
+}
+.service-box-description {
+    font-size: 1.05rem;
+}
+
+.service-box-button {
+    padding: 5% 20%;
+    position: relative;
+    bottom: 10%;
+    left: 55%;
+    border: none;
+    font-size: 1.05rem;
+    border-radius: 25px;
+    background: var(--light-green);
+}
