@@ -8,33 +8,36 @@
 
 .services-boxes-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    width: 80%;
-    margin: 5% 10%;
 }
 .purple {
     background: var(--purple);
 }
+.red {
+    background: var(--red);
+}
+.service-box-container {
+    padding: 3%;
+}
 .service-box {
     aspect-ratio: 1/0.75;
-    min-width: 200px;
-    max-width: 325px;
+    width: 300px;
     padding: 3%;
     color: white;
 }
 .service-box-title {
-    margin-bottom: 5%;
+    margin: 5% 0;
 }
 .service-box-description {
     font-size: 1.05rem;
 }
 
 .service-box-button {
-    position: relative;
-    left: 65%;
-    top: 55%;
     padding: 5% 20%;
+    position: relative;
+    bottom: 10%;
+    left: 55%;
     border: none;
     font-size: 1.05rem;
     border-radius: 25px;
