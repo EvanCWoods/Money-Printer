@@ -3,4 +3,12 @@
     margin: 0;
     box-sizing: border-box;
     --purple: #6229a3; 
+    --green: rgb(53, 206, 165);
+    --light-green: rgb(164, 255, 213);
+}
+button:hover {
+    cursor: pointer;
+}
+.green-text {
+    color: var(--green);
 }
