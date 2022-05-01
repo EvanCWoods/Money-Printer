@@ -10,3 +10,14 @@
     margin-top: 8%;
     line-height: 1.4rem;
 }
+.facts-list-container {
+    padding: 5% 0;
+}
+.fact-list-item {
+    margin: 5%;
+    list-style: none;
+}
+.facts-list-container i {
+    color: var(--red);
+    margin-right: 3%;
+}
