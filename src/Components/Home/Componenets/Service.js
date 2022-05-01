@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Service(props) {
   return (
@@ -7,7 +8,7 @@ function Service(props) {
           <h2 className="service-box-title">{props.title}</h2>
           <p className="service-box-description">{props.description}</p>
         </div>
-        <button className="service-box-button">More</button>
+        <Link to={props.redirect}><button className="service-box-button">More</button></Link>
       </div>
   );
 }
