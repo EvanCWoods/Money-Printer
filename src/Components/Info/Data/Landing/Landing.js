@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../Reusable/Header.js";
+import Header from "../../Reusable/Header.js";
 
 function Landing() {
     return (

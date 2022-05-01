@@ -1,0 +1,12 @@
+.facts-container {
+    margin-top : 15%;
+}
+.facts-left {
+    width: 50%;
+    background: var(--purple);
+    color: white;
+}
+.facts-description {
+    margin-top: 8%;
+    line-height: 1.4rem;
+}
