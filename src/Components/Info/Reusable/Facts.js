@@ -17,6 +17,7 @@ function Facts(props) {
                             })
                         }
                     </ul>
+                    <div className="facts-skew"></div>
                 </div>
             </div>
         </div>

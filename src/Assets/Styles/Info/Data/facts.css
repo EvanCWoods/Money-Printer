@@ -5,6 +5,7 @@
     width: 50%;
     background: var(--purple);
     color: white;
+    display: flex;
 }
 .facts-description {
     margin-top: 8%;
@@ -20,4 +21,14 @@
 .facts-list-container i {
     color: var(--red);
     margin-right: 3%;
+}
+.facts-skew {
+    background: var(--purple);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    position: relative;
+    top: -100%;
+    right: -20%;
+    transform: skewX(-3deg);
 }
