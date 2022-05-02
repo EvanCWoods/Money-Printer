@@ -13,7 +13,7 @@ function Facts(props) {
                     <ul className="facts-list-container">
                         {
                             props.list.map((value, index) => {
-                                return <li className="fact-list-item"><i class="fa-solid fa-diamond"></i>{value}</li>
+                                return <li className="fact-list-item"><i class="fa-solid fa-diamond"></i><span>{value}</span></li>
                             })
                         }
                     </ul>
