@@ -6,8 +6,8 @@ function Navigation() {
     return (
         <div className="navigation-container">
             <Link className="nav-link" to="/">Home</Link>
-            <Link className="nav-link" to="/">placeholder</Link>
-            <Link className="nav-link" to="/">placeholder</Link>
+            <Link className="nav-link" to="/login">Login</Link>
+            <Link className="nav-link" to="/sign-up">Sign Up</Link>
         </div>
     );
 }
