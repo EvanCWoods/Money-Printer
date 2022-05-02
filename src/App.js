@@ -8,6 +8,9 @@ import "./Assets/Styles/root.css";
 function App() {
   return (
     <Router>
+      <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Ubuntu:wght@700&display=swap" rel="stylesheet"></link>
       <Header />
       <Routes>
         <Route exact path="/" element={ <Home /> }/>

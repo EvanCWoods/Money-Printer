@@ -10,6 +10,10 @@
 button:hover {
     cursor: pointer;
 }
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+}
 .green-text {
     color: var(--green);
 }
