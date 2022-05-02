@@ -11,6 +11,12 @@
     margin-top: 8%;
     line-height: 1.4rem;
 }
+.facts-content {
+    margin-left: 8%;
+}
+.facts-title {
+    padding-top: 8%;
+}
 .facts-list-container {
     padding: 5% 0;
 }
