@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../Assets/Styles/Info/Data/facts.css";
+import "../../Assets/Styles/Info/Data/facts.css";
 
 
 function Facts(props) {
