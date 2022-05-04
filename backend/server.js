@@ -9,8 +9,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(routes);
 
-mongoConnection(() => {
-    app.listen(PORT, () => {
-      console.log(`Running on port: ${PORT}!`);
-    });
-  });
+mongoConnection();
+
+app.listen(PORT, () => {
+  console.log(`Running on port: ${PORT}!`);
+});
