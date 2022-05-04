@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
-router.route("/test", (req, res) => {
-    res.send("Working at /test");
+router.get("/", (req, res) => {
+    res.send("Working at /");
 });
 
 module.exports = router;
