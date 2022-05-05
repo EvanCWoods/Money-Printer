@@ -21,6 +21,7 @@ function SignUp() {
         if (password === confirmPassword) {
             fetch("/api/users/create", {
                 method: "POST",
+                mode: "cors",
                 headers: {
                     "Content-Type": "application/json"
                 },
