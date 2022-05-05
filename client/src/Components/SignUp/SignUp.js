@@ -11,16 +11,20 @@ function SignUp() {
         const email = document.querySelector(".email").value;
         const password = document.querySelector(".password").value;
         const confirmPassword = document.querySelector(".confirmPassword").value;
-
+        let userData = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+        }
+        console.log(firstName, lastName, email, password, confirmPassword);
         if (password === confirmPassword) {
             fetch("/api/users/create", {
                 method: "POST",
-                body: {
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    password: password,
-                }
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userData)
             });
         }
     }

@@ -16,19 +16,19 @@ const userSchema = new mongoose.Schema({
         required: true,
         lowercase: true,
     },
-    username: {
-        type: String,
-        required: true,
-        lowercase: true,
-    },
+    // username: {
+    //     type: String,
+    //     required: true,
+    //     lowercase: true,
+    // },
     password: {
         type: String,
         required: true,
         lowercase: true,
     },
-    subscription: {
-        type: String,
-    },
+    // subscription: {
+    //     type: String,
+    // },
 })
 
 const User = mongoose.model("User", userSchema);
