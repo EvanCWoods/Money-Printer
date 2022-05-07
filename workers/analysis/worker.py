@@ -5,6 +5,16 @@ import ssl
 import pandas as pd
 import numpy as np
 
+
+### 
+# NOTES FOR TOMORROW:
+    # THIS ONLY APPLIES TO BTC DATA RIGHT NOW SO CAN CURATE THIS TO BE ONE TIME USE SCRIPT
+        # GLOBAL VARIABLES THAT ARE EASY TO CHANGE FOR EACH COINTS
+    
+    # SET UP WORKER TO RUN THIS EVERY HOUR BEFORE ADDING DATA TO THE DATABASE
+
+###
+
 # GLOBAL VARIABLES
 HOUR = 3600
 RAW_MONGO_URI = config("RAW_MONGO_URI")
@@ -46,6 +56,29 @@ def analysis():
             else:
                 signals.append("Sell")
             i+=1
+
+        # CREATE AND ADD NEW OBJECTS TO DATABASE
+        forDB = []
+
+        n = 0
+        while n < len(prices):
+            # RE ASSIGN THE TICKER VALUE
+            if (element == "live"):
+                ticker = "BTC"
+            elif (element == "ethereum"):
+                ticker = "ETH"
+            elif (element == "binance"):
+                ticker = "BNB"
+
+            forDB.appen(
+                {
+                    "Timestamp": timestamps[n],
+                    "Ticker": ticker,
+                    "Close": prices[i],
+                    "MA200": averages[i],
+                    "Signal": signals[i]
+                }
+            )
 
 # FUNCTION TO GET AVERAGE
 def getMa(prices, rate):
