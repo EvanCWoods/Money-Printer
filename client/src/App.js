@@ -3,6 +3,7 @@ import Header from "./Components/Header/Header.js";
 import Home from "./Components/Home/Home.js"
 import Data from "./Components/Info/Data/Data.js";
 import SignUp from "./Components/SignUp/SignUp.js";
+import Login from "./Components/Login/Login.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./Assets/Styles/root.css";
 
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/" element={ <Home /> }/>
         <Route exact path="/live-data-information" element={ <Data /> }/>
         <Route exact path="/sign-up" element={ <SignUp /> }/>
+        <Route exact path="/login" element={ <Login /> } />
       </Routes>
     </Router>
   );

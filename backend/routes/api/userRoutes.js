@@ -3,7 +3,6 @@ const userModel = require("../../models/user.js");
 
 
 router.post("/create", async (req, res) => {
-    console.log(req.body);
     try {
         const user = new userModel({
             firstName: req.body.firstName,
@@ -21,9 +20,17 @@ router.post("/create", async (req, res) => {
     }
 });
 
-router.get("/login", (req, res) => {
-    if (req.session.loggedIn == true) {
-        res.status(200).json("Already Logged In");
+router.get("/verify", async (req, res) => {
+    try {
+        userModel.find({}, (err, user) => {
+            if (user) {
+                res.status(200).json(user);
+            } else {
+                console.log("Something went wrong");
+            }
+        })
+    } catch (err) {
+        console.log(err);
     }
 })
 module.exports = router;
