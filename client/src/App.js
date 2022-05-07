@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Components/Header/Header.js";
 import Home from "./Components/Home/Home.js"
 import Data from "./Components/Info/Data/Data.js";
+import Algorithms from "./Components/Info/Algorithm/Algorithm.js";
 import SignUp from "./Components/SignUp/SignUp.js";
 import Login from "./Components/Login/Login.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={ <Home /> }/>
         <Route exact path="/live-data-information" element={ <Data /> }/>
+        <Route exact path="/algorithms-information" element={ <Algorithms />} />
         <Route exact path="/sign-up" element={ <SignUp /> }/>
         <Route exact path="/login" element={ <Login /> } />
       </Routes>

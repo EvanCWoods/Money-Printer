@@ -10,7 +10,7 @@ function Services() {
             </div>
             <div className="services-boxes-container">
                 <Service title="Live Market Data" description="Rapid, accurate and perfomant live data feeds" classes="service-box purple" redirect="/live-data-information"/>
-                <Service title="Market Signals Algorithms" description="Smart trading algorithms that ensure you outpace the market." classes=" service-box red" redirect="/"/>
+                <Service title="Market Signals Algorithms" description="Smart trading algorithms that ensure you outpace the market." classes=" service-box red" redirect="/algorithms-information"/>
             </div>
         </div>
     );
