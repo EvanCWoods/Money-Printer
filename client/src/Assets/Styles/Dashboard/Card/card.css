@@ -1,0 +1,53 @@
+.buy {
+    color: var(--green);
+}
+.sell {
+    color: var(--red);
+}
+.card-container {
+    width: 30%;
+    margin: 5% 1.5%;
+}
+.card-market-side {
+    padding-top: 3%;
+    padding-bottom: 12%;
+}
+.card-header {
+    background: var(--purple);
+    text-align: center;
+}
+.card-price {
+    padding-top: 12%;
+    padding-bottom: 3%;
+}
+.current-position-title {
+    color: var(--grey-text);
+    margin-top: 2%;
+    margin-left: 1%;
+}
+.current-position-percentage-container {
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.percentage-circle {
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    border: 10px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.current-position-percentage {
+    color: var(--grey-text);
+}
+.last-day-title {
+    color: var(--grey-text);
+}
+.last-day-graph-container {
+    width: 100%;
+    aspect-ratio: 1/1;
+}

@@ -6,6 +6,7 @@
     --green: rgb(53, 206, 165);
     --light-green: rgb(164, 255, 213);
     --red: rgb(247, 75, 72);
+    --grey-text: rgb(79, 79, 79);
 }
 button:hover {
     cursor: pointer;
