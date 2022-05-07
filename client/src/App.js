@@ -5,10 +5,12 @@ import Data from "./Components/Info/Data/Data.js";
 import Algorithms from "./Components/Info/Algorithm/Algorithm.js";
 import SignUp from "./Components/SignUp/SignUp.js";
 import Login from "./Components/Login/Login.js";
+import Dashboard from "./Components/Dashboard/Dashboard.js"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./Assets/Styles/root.css";
 
 function App() {
+
   return (
     <Router>
       <link rel="preconnect" href="https://fonts.googleapis.com"></link>
@@ -21,6 +23,7 @@ function App() {
         <Route exact path="/algorithms-information" element={ <Algorithms />} />
         <Route exact path="/sign-up" element={ <SignUp /> }/>
         <Route exact path="/login" element={ <Login /> } />
+        <Route exact path="/dashboard" element={<Dashboard /> } />
       </Routes>
     </Router>
   );
