@@ -11,11 +11,19 @@ router.post("/create", async (req, res) => {
             email: req.body.email,
             password: req.body.password,
         }); 
-        await user.save();
-        res.json({"Status": "Succuss", "Created user": user});
+        await user.save().then( () => {
+            req.session.loggedIn = true;
+        }
+        );
+        res.json({"Status": "Succuss"});
     } catch(err) {
         res.send(err);
     }
 });
 
+router.get("/login", (req, res) => {
+    if (req.session.loggedIn == true) {
+        res.status(200).json("Already Logged In");
+    }
+})
 module.exports = router;

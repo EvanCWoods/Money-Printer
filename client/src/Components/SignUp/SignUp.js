@@ -26,6 +26,10 @@ function SignUp() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(userData)
+            }).then((response) => {
+                if (response.ok) {
+                    window.location.replace("/subscription");
+                }
             });
         }
     }
