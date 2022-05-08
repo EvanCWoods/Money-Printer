@@ -3,22 +3,24 @@ from pymongo import MongoClient
 import ssl
 import numpy as np
 import pandas as pd
+import sys
+import time
 
 HOUR = 3600
 RAW_MONGO_URI = config("RAW_MONGO_URI")
 RATE = 200
 
 
-def getSchemas(schema):
-    cluster = MongoClient(RAW_MONGO_URI,
+def getSchemas(schema, URI, clusterName):
+    cluster = MongoClient(URI,
             ssl_cert_reqs=ssl.CERT_NONE)
-    db = cluster["data"]
+    db = cluster[clusterName]
     return db[schema]
 
 
 
 def analysis():
-    data = list(getSchemas("live").find().sort("timestamp", 1))    # FOR EACH SCHEMA, GET THE DATA IN ASCENDING TIME ORDER
+    data = list(getSchemas("live", RAW_MONGO_URI, "data").find().sort("timestamp", 1))    # FOR EACH SCHEMA, GET THE DATA IN ASCENDING TIME ORDER
         
     # LOOP THROUGH AND ISOLATE THE CLOSING PRICE
     prices = []
@@ -48,16 +50,31 @@ def analysis():
     # RE ASSIGN THE TICKER VALUE
     ticker = "BTC"
 
-    print(
-        {
-            "Timestamp": timestamps[-1],
-            "Ticker": ticker,
-            "Close": prices[-1],
-            "MA200": averages[-1],
-            "Signal": signals[-1]
+    return {
+            "Timestamp": str(timestamps[-1]),
+            "Ticker": str(ticker),
+            "Close": float(prices[-1]),
+            "MA200": float(averages[-1]),
+            "Signal": str(signals[-1])
             }
-        )
+        
     
+
+
+def getHours():
+    currentTime = int(time.time())
+
+    if (currentTime % HOUR == 0):
+        time.sleep(5)
+        collection = getSchemas("bitcoin", RAW_MONGO_URI, "algorithm")
+        collection.insert_one(analysis())
+        time.sleep(1)
+    else:
+        time.sleep(1)
+        getHours()
+
+
+
 
 
 
@@ -67,7 +84,8 @@ def getMa(prices, rate):
 
 
 def main():
-    analysis()
+    getHours()
+    sys.exit(1)
 
 
 if __name__ == '__main__':
