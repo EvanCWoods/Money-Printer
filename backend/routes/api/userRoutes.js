@@ -15,7 +15,7 @@ router.post("/create", async (req, res) => {
         await user.save().then( () => {
             const token = Auth.signToken(user);
             console.log(token);
-            res.send({"User": user, "Token": token});
+            res.send({"Token": token});
         }
         );
     } catch(err) {

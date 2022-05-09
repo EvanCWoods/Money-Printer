@@ -29,7 +29,9 @@ function SignUp() {
             }).then((response) => {
                 if (response.ok) {
                     response.json().then((data) => {
-                        console.log(data)
+                        console.log(data.Token);
+                        localStorage.setItem("super-secret", data.Token);
+                        document.location.replace("/dashboard");
                     })
                 }
             });
