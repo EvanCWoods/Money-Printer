@@ -74,8 +74,11 @@ def getHours():
 
     if (currentTime % HOUR == 0):
         time.sleep(5)
-        collection = getSchemas("bitcoin", RAW_MONGO_URI, "algorithm")
-        collection.insert_one(analysis())
+        collections = ["bitcoin", "ethereum", "binance"]
+        for name in collections:
+            db = getSchemas(name, RAW_MONGO_URI, "algorithm")
+            db.insert_one(analysis())
+
         time.sleep(1)
     else:
         time.sleep(1)

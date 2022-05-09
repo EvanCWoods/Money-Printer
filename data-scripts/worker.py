@@ -75,7 +75,7 @@ def analysis():
         )
         n+=1
 
-    print(len(forDB))
+    return forDB
 
 # FUNCTION TO GET AVERAGE
 def getMa(prices, rate):
@@ -95,7 +95,7 @@ def getMa(prices, rate):
 
 
 def main():
-    analysis()
+    print(analysis())
 
 
 if __name__ == '__main__':

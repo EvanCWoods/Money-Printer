@@ -6,8 +6,18 @@ import Algorithms from "./Components/Info/Algorithm/Algorithm.js";
 import SignUp from "./Components/SignUp/SignUp.js";
 import Login from "./Components/Login/Login.js";
 import Dashboard from "./Components/Dashboard/Dashboard.js"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./Assets/Styles/root.css";
+
+
+const ProtectedRoute = ({children }) => {
+  const token = localStorage.getItem("super-secret");
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
 
 function App() {
 
@@ -23,7 +33,14 @@ function App() {
         <Route exact path="/algorithms-information" element={ <Algorithms />} />
         <Route exact path="/sign-up" element={ <SignUp /> }/>
         <Route exact path="/login" element={ <Login /> } />
-        <Route exact path="/dashboard" element={<Dashboard /> } />
+        <Route
+          exact path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

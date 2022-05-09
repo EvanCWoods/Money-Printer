@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../Reusable/Header.js"
 import "../../Assets/Styles/signUp/signUp.css";
+import Auth from "../../utils/auth.js";
 
 
 function SignUp() {
@@ -17,7 +18,6 @@ function SignUp() {
             email: email,
             password: password,
         }
-        console.log(firstName, lastName, email, password, confirmPassword);
         if (password === confirmPassword) {
             fetch("/api/users/create", {
                 method: "POST",
@@ -28,7 +28,11 @@ function SignUp() {
                 body: JSON.stringify(userData)
             }).then((response) => {
                 if (response.ok) {
-                    window.location.replace("/subscription");
+                    response.json().then((data) => {
+                        console.log(data.Token);
+                        localStorage.setItem("super-secret", data.Token);
+                        document.location.replace("/dashboard");
+                    })
                 }
             });
         }

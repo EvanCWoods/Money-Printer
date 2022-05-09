@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const userModel = require("../../models/user.js");
+const Auth = require("../../utils/auth.js");
+const jwt = require("jsonwebtoken");
 
 
 router.post("/create", async (req, res) => {
@@ -9,24 +11,30 @@ router.post("/create", async (req, res) => {
             lastName: req.body.lastName,
             email: req.body.email,
             password: req.body.password,
-        }); 
+        });
         await user.save().then( () => {
-            req.session.loggedIn = true;
+            const token = Auth.signToken(user);
+            console.log(token);
+            res.send({"Token": token});
         }
         );
-        res.json({"Status": "Succuss"});
     } catch(err) {
         res.send(err);
     }
 });
 
-router.get("/verify", async (req, res) => {
+router.post("/login", async (req, res) => {
     try {
-        userModel.find({}, (err, user) => {
+        let token = req.query.token;
+        console.log(token);
+        userModel.findOne({email: req.body.email}, async (err, user) => {
             if (user) {
-                res.status(200).json(user);
+                const correctPassword = await user.isCorrectPassword(req.body.password);
+                const token = Auth.signToken(user);
+
+                res.status(200).json({user, token});
             } else {
-                console.log("Something went wrong");
+                res.json({"Data": "Login Invalid"});
             }
         })
     } catch (err) {
