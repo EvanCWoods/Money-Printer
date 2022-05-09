@@ -1,20 +1,28 @@
 import React from "react";
 import "../../Assets/Styles/Login/login.css";
 import Header from "../Reusable/Header.js";
+import Auth from "../../utils/auth.js";
 
 function Login() {
     function sendForm(event) {
         event.preventDefault();
-        // const email = document.querySelector(".login-email").value;
-        // const password = document.querySelector(".login-password").value;
+        const email = document.querySelector(".login-email").value;
+        const password = document.querySelector(".login-password").value;
+
+        const user = {
+            email: email,
+            password: password
+        }
 
         console.log("SENDING RESPONSE");
-        fetch("/api/users/verify", {
-            method: "GET",
+        
+        fetch("/api/users/login", {
+            method: "POST",
             mode: "cors",
             headers: {
                 "Content-Type": "application/json"
             },
+            body: JSON.stringify(user),
         }).then((response) => {
             console.log("AWAITING RESPONSE");
             if(response.ok) {
