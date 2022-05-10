@@ -35,10 +35,10 @@ function Login() {
             <div className="login-form-container">
                 <form className="login-form" onSubmit={sendForm}>
                     <div className="email-container">
-                        <input type="text" className="login-email input login-email" placeholder="Email"></input>
+                        <input type="email" className="login-email input login-email" placeholder="Email"></input>
                     </div>
                     <div className="password-container">
-                        <input type="text" className="login-password input login-password" placeholder="Password"></input>
+                        <input type="password" className="login-password input login-password" placeholder="Password"></input>
                     </div>
                     <div className="login-button-container">
                         <button className="login-button" type="submit">Log In</button>
