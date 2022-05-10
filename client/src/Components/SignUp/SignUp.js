@@ -1,8 +1,6 @@
 import React from "react";
 import Header from "../Reusable/Header.js"
 import "../../Assets/Styles/signUp/signUp.css";
-import Auth from "../../utils/auth.js";
-
 
 function SignUp() {
     function sendForm(event) {

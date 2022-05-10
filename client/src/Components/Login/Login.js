@@ -1,7 +1,6 @@
 import React from "react";
 import "../../Assets/Styles/Login/login.css";
 import Header from "../Reusable/Header.js";
-import Auth from "../../utils/auth.js";
 
 function Login() {
     function sendForm(event) {

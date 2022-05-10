@@ -20,12 +20,16 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        lowercase: true,
     },
     // subscription: {
     //     type: String,
     // },
 })
+
+// compare the incoming password with the hashed password
+userSchema.methods.isCorrectPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 
 // set up pre-save middleware to create password
 userSchema.pre('save', async function (next) {
@@ -36,11 +40,6 @@ userSchema.pre('save', async function (next) {
   
     next();
   });
-  
-  // compare the incoming password with the hashed password
-  userSchema.methods.isCorrectPassword = async function (password) {
-    return bcrypt.compare(password, this.password);
-  };
 
 const User = mongoose.model("User", userSchema);
 
