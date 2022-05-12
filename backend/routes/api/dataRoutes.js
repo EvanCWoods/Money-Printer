@@ -1,0 +1,62 @@
+const router = require("express").Router();
+const { MongoClient } = require("mongodb")
+const dotenv = require("dotenv");
+
+dotenv.config()
+
+
+router.get("/", async (req, res) => {
+    const client = new MongoClient(process.env.MONGO_URI, { useNewUrlParser: true });
+    await client.connect();
+    const cursor = client.db("algorithm").collection("bitcoin").find(
+    
+    ).sort({ "Timestamp": 1 });
+    const results = await cursor.toArray();
+
+    let currentData = {
+        "_id": results[results.length - 1]._id,
+		"Timestamp": results[results.length - 1].Timestamp,
+		"Ticker": results[results.length - 1].Ticker,
+		"Close": results[results.length - 1].Close,
+		"MA200": results[results.length - 1].MA200,
+		"Signal": results[results.length - 1].Signal
+    }
+
+    let swapData;
+
+    for (let i = 0; i < results.length; i++) {
+        if (results[i].Signal != currentData.Signal) {
+            swapData = {
+                "_id": results[i - 1]._id,
+		        "Timestamp": results[i - 1].Timestamp,
+		        "Ticker": results[i - 1].Ticker,
+		        "Close": results[i - 1].Close,
+		        "MA200": results[i - 1].MA200,
+		        "Signal": results[i - 1].Signal
+            } = results[i - 1];
+            break;
+        }
+    }
+    
+    let finalDataObject = {
+        "Open-Timestamp": swapData.Timestamp,
+        "Current-Timestamp": currentData.Timestamp,
+        "Duration": Math.floor(((currentData.Timestamp - swapData.Timestamp) / 3600) / 24),
+        "Ticker": currentData.Ticker,
+        "Position-Start": swapData.Close.toFixed(2),
+        "Last-Close": currentData.Close.toFixed(2),
+        "Performance": "",
+        "Current-Ma": currentData.MA200.toFixed(2),
+        "Signal": currentData.Signal
+    }
+
+    if (currentData.Signal == "Sell") {
+        finalDataObject.Performance = (-1 * ((currentData.Close - swapData.Close) / swapData.Close) * 100).toFixed(2);
+    } else {
+        finalDataObject.Performance = (((currentData.Close - swapData.Close) / swapData.Close) * 100).toFixed(2);
+    }
+
+    res.json(finalDataObject);
+});
+
+module.exports = router;    

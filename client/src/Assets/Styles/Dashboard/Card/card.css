@@ -1,7 +1,7 @@
-.buy {
+.Buy {
     color: var(--green);
 }
-.sell {
+.Sell {
     color: var(--red);
 }
 .card-container {

@@ -66,11 +66,11 @@ def analysis():
 
         forDB.append(
             {
-                "Timestamp": timestamps[n],
-                "Ticker": ticker,
-                "Close": prices[n],
-                "MA200": averages[n],
-                "Signal": signals[n]
+                "Timestamp": int(timestamps[n]),
+                "Ticker": str(ticker),
+                "Close": float(prices[n]),
+                "MA200": float(averages[n]),
+                "Signal": str(signals[n])
             }
         )
         n+=1
@@ -81,21 +81,14 @@ def analysis():
 def getMa(prices, rate):
     return prices.rolling(rate).mean()
 
-# FUNCTION TO RUN THE ALGORITHM
-
-
-# FUNCTION TO SEND THE NEW DATA TO THE NEW DATABASE
-    # MULTIPLE SCHEMAS
-
-
-# RUN THE WORKER EVERY HOUR, 5 SECONDS AFTER THE NEW HOUR, TO ENSURE NEW DATA IS IN ALL SCHEMAS.
-
-
-
-
 
 def main():
-    print(analysis())
+    cluster = MongoClient(RAW_MONGO_URI,
+            ssl_cert_reqs=ssl.CERT_NONE)
+    db = cluster["algorithm"]
+    schema = db["bitcoin"]
+    data = analysis()
+    schema.insert_many(data)
 
 
 if __name__ == '__main__':
