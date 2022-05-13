@@ -39,14 +39,14 @@ router.get("/", async (req, res) => {
     }
     
     let finalDataObject = {
-        "Open-Timestamp": swapData.Timestamp,
-        "Current-Timestamp": currentData.Timestamp,
+        "OpenTimestamp": swapData.Timestamp,
+        "CurrentTimestamp": currentData.Timestamp,
         "Duration": Math.floor(((currentData.Timestamp - swapData.Timestamp) / 3600) / 24),
         "Ticker": currentData.Ticker,
-        "Position-Start": swapData.Close.toFixed(2),
-        "Last-Close": currentData.Close.toFixed(2),
+        "PositionStart": swapData.Close.toFixed(2),
+        "LastClose": currentData.Close.toFixed(2),
         "Performance": "",
-        "Current-Ma": currentData.MA200.toFixed(2),
+        "CurrentMa": currentData.MA200.toFixed(2),
         "Signal": currentData.Signal
     }
 
@@ -56,7 +56,7 @@ router.get("/", async (req, res) => {
         finalDataObject.Performance = (((currentData.Close - swapData.Close) / swapData.Close) * 100).toFixed(2);
     }
 
-    res.json(finalDataObject);
+    res.send(finalDataObject);
 });
 
 module.exports = router;    
