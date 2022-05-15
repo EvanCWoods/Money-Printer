@@ -45,11 +45,11 @@ function SignUp() {
                         <input type="text" className="sign-up-input input lastName" placeholder="Last Name"></input>
                     </div>
                     <div className="email-container">
-                        <input type="text" className="sign-up-email input email" placeholder="Email"></input>
+                        <input type="email" className="sign-up-email input email" placeholder="Email"></input>
                     </div>
                     <div className="password-container">
-                        <input type="text" className="sign-up-password input password" placeholder="Password"></input>
-                        <input type="text" className="sign-up-password input confirmPassword" placeholder="Confirm Password"></input>
+                        <input type="password" className="sign-up-password input password" placeholder="Password"></input>
+                        <input type="password" className="sign-up-password input confirmPassword" placeholder="Confirm Password"></input>
                     </div>
                     <div className="sign-up-button-container">
                         

@@ -1,53 +1,10 @@
-// import React, { useEffect, useState } from 'react';
-// import './App.css';
-// import List from './components/List';
-// import withListLoading from './components/withListLoading';
-
-// function App() {
-//   const ListLoading = withListLoading(List);
-//   const [appState, setAppState] = useState({
-//     loading: false,
-//     repos: null,
-//   });
-
-//   useEffect(() => {
-//     setAppState({ loading: true });
-//     const apiUrl = `https://api.github.com/users/hacktivist123/repos`;
-//     fetch(apiUrl)
-//       .then((res) => res.json())
-//       .then((repos) => {
-//         setAppState({ loading: false, repos: repos });
-//       });
-//   }, [setAppState]);
-//   return (
-//     <div className='App'>
-//       <div className='container'>
-//         <h1>My Repositories</h1>
-//       </div>
-//       <div className='repo-container'>
-//         <ListLoading isLoading={appState.loading} repos={appState.repos} />
-//       </div>
-//       <footer>
-//         <div className='footer'>
-//           Built{' '}
-//           <span role='img' aria-label='love'>
-//             💚
-//           </span>{' '}
-//           with by Shedrack Akintayo
-//         </div>
-//       </footer>
-//     </div>
-//   );
-// }
-
-
-
 import React, { useEffect, useState } from "react";
 import Card from "./Card/Card.js";
 import "../../Assets/Styles/Dashboard/dashboard.css";
 
 function Dashboard() {
 
+    let recomendation = "";
     const [data, setData] = useState({});
 
     useEffect(() => {
@@ -67,9 +24,17 @@ function Dashboard() {
         fetchData();
     }, []);
 
+    if (data.Performance > 20 && data.Duration < 7 && data.Signal === "Buy") {
+        recomendation = "Sell";
+    } else if (data.Performance > 20 && data.Duration < 7 && data.Signal === "Sell"){
+        recomendation = "Buy";
+    }
+    else {
+        recomendation = "Hold";
+    }
     return(
         <div className="dashboard-container">
-            <Card color={data.Signal} ticker={data.Ticker} price={`$${data.LastClose}`} marketSide={data.Signal} currentPercentage={`${data.Performance}%`}/>
+            <Card color={data.Signal} ticker={data.Ticker} price={`$${data.LastClose}`} marketSide={data.Signal} currentPercentage={`${data.Performance}%`} duration={`${data.Duration} Days`} Recomendation={recomendation}/>
         </div>
     );
 }

@@ -1,0 +1,30 @@
+.footer-container {
+    padding: 8% 0;
+    display: flex;
+    flex-wrap: wrap;
+    background: var(--purple);
+}
+.footer-left {
+    width: 50%;
+    padding: 1.5%;
+    line-height: 1.3rem;
+}
+.footer-text {
+    color: white;
+}
+.footer-mid {
+    width: 50%;
+    padding: 1.5%;
+    line-height: 1.3rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.contact-text {
+    color: var(--red);
+    width: 100%;
+    text-align: center;
+}
+.contact-info {
+    color: white;
+}

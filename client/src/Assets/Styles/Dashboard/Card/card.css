@@ -1,3 +1,6 @@
+.action {
+    color: var(--grey-text); 
+}
 .Buy {
     color: var(--green);
 }
@@ -7,7 +10,10 @@
 .card-container {
     width: 30%;
     margin: 5% 1.5%;
+    box-shadow: 0px 0px 10px 10px rgb(162, 162, 162);
+    margin-bottom: 10%;
 }
+
 .card-market-side {
     padding-top: 3%;
     padding-bottom: 12%;
@@ -20,7 +26,7 @@
     padding-top: 12%;
     padding-bottom: 3%;
 }
-.current-position-title {
+.current-position-duration {
     color: var(--grey-text);
     margin-top: 2%;
     margin-left: 1%;
@@ -44,10 +50,12 @@
 .current-position-percentage {
     color: var(--grey-text);
 }
-.last-day-title {
-    color: var(--grey-text);
+.action-container {
+    display: flex;
+    padding-left: 1%;
+    margin-bottom: 5%;
 }
-.last-day-graph-container {
-    width: 100%;
-    aspect-ratio: 1/1;
+.action-title {
+    padding-right: 3%;
+    color: var(--grey-text);
 }

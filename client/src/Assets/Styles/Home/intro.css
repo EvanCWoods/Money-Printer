@@ -10,6 +10,7 @@
 .intro-left img {
     width: 100%;
     height: 100%;
+    max-width: 600px;
 }
 .intro-right {
     width: 60%;
@@ -24,4 +25,19 @@
     margin-left: 5%;
     margin-top: 3%;
     line-height: 1.8rem;
+}
+
+@media (max-width: 780px) {
+    .intro-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .intro-left, .intro-right {
+        width: 80%;
+        height: 80%;
+    }
+    .intro-left img {
+        max-width: 400px;
+        max-height: 400px;
+    }
 }

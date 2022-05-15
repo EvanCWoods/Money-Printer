@@ -1,10 +1,12 @@
 import React from "react";
 import "../../../Assets/Styles/Home/intro.css";
+import automateImage from "../../../Assets/Images/FragrantDirectBug-max-1mb.gif";
 
 function Intro() {
   return (
     <div className="intro-container">
         <div className="intro-left">
+          <img src={automateImage} alt="automate"></img>
         </div>
       <div className="intro-right">
         <div className="intro-title-container">
@@ -21,9 +23,9 @@ function Intro() {
             wealth with confidence. The keys to this software are:
           </p>
           <ul className="intro-list">
-              <li className="intro-list-item">Comprehensive market data.</li>
-              <li className="intro-list-item">Algorithms that outperform the market.</li>
-              <li className="intro-list-item">Confidence in the product.</li>
+              <li className="intro-list-item"><span className="custom-list-point"><i class="fa-solid fa-diamond"></i>  </span>Comprehensive market data.</li>
+              <li className="intro-list-item"><span className="custom-list-point"><i class="fa-solid fa-diamond"></i>  </span>Algorithms that outperform the market.</li>
+              <li className="intro-list-item"><span className="custom-list-point"><i class="fa-solid fa-diamond"></i>  </span>Confidence in the product.</li>
           </ul>
         </div>
       </div>

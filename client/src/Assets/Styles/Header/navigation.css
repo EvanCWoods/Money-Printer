@@ -7,3 +7,22 @@
     color: white;
     text-decoration: none;
 }
+
+.nav-link {
+    background-image:
+    linear-gradient(
+    transparent 0%,
+    transparent 90%,
+    var(--green) 90%,
+    var(--green) 100%
+    );
+    background-repeat:no-repeat;
+    background-size: 0% 100%;
+    background-position-x: right;
+    transition: background-size 400ms;
+}    
+.nav-link:hover {
+
+    background-size: 100% 100%;
+    background-position-x: left;
+}    

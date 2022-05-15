@@ -6,6 +6,7 @@ import Algorithms from "./Components/Info/Algorithm/Algorithm.js";
 import SignUp from "./Components/SignUp/SignUp.js";
 import Login from "./Components/Login/Login.js";
 import Dashboard from "./Components/Dashboard/Dashboard.js"
+import Footer from "./Components/Footer/Footer.js";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./Assets/Styles/root.css";
 
@@ -42,6 +43,7 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </Router>
   );
 }

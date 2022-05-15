@@ -11,18 +11,16 @@ function Card(props) {
             </div>
             <div className="card-body">
                 <div className="current-position-container">
-                    <p className="current-position-title">Current Position</p>
+                    <p className="current-position-duration">Duration: {props.duration}</p>
                     <div className="current-position-percentage-container">
                         <div className={`percentage-circle ${props.color}`}>
                             <h3 className="current-position-percentage">{props.currentPercentage}</h3>
                         </div>
                     </div>
                 </div>
-                <div className="last-day-container">
-                    <p className="last-day-title">Last 24 hours:</p>
-                    <div className="last-day-graph-container">
-                        ADD A GRAPH USING A LIBRARY
-                    </div>
+                <div className="action-container">
+                    <h3 className="action-title">Best Action: </h3>
+                    <h3 className={`${props.Recomendation} action`}>{ props.Recomendation}</h3>
                 </div>
             </div>
         </div>
