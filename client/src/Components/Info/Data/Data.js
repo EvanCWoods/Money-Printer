@@ -1,6 +1,6 @@
 import React from "react";
 import Landing from "./Landing/Landing.js";
-import Information from "../../Reusable/Information.js";
+import Information from "./Landing/Information.js";
 import Facts from "../../Reusable/Facts.js";
 import "../../../Assets/Styles/Info/Data/container.css";
 
