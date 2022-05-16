@@ -4,16 +4,19 @@
     "description": "",
     "main": "backend/server.js",
     "scripts": {
-      "start": "node backend --ignore client",
-      "develop": "concurrently \"cd backend && npm run start\" \"cd client && npm start\"",
-      "install": "cd backend && npm i && cd ../client && npm i",
-      "seed": "cd backend && npm run seed",
-      "build": "cd client && npm run build"
+        "start": "node backend --ignore client",
+        "develop": "concurrently \"cd backend && npm run start\" \"cd client && npm start\"",
+        "install": "cd backend && npm i && cd ../client && npm i",
+        "seed": "cd backend && npm run seed",
+        "build": "cd client && npm run build"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
-      "concurrently": "^5.1.0"
+        "concurrently": "^5.1.0"
+    },
+    "dependencies": {
+        "cookie-parser": "^1.4.6"
     }
-  }
+}

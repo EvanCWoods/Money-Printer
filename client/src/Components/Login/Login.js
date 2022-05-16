@@ -26,6 +26,8 @@ function Login() {
             console.log("AWAITING RESPONSE");
             if(response.ok) {
                 console.log(response);
+                localStorage.setItem("super-secret", response.Token);
+                document.location.replace("/dashboard");
             }
         })
     }

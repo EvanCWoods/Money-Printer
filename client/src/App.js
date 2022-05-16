@@ -20,6 +20,12 @@ const ProtectedRoute = ({children }) => {
   return children;
 };
 
+// Set a timer for clearing the JWT local storage
+const TIMER = setInterval(removeItem,1000 * 60 * 60);
+function removeItem(){
+	  window.localStorage.removeItem("super-secret");
+}
+
 function App() {
 
   return (
