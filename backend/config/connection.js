@@ -10,8 +10,6 @@ async function main() {
     }).then(console.log("Connected")).catch(err => {
         console.log(err);
     });
-
-
 }
 
 module.exports = main;

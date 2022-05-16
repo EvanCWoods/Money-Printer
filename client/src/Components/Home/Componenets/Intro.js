@@ -10,7 +10,7 @@ function Intro() {
         </div>
       <div className="intro-right">
         <div className="intro-title-container">
-          <h1 className="intro-title">Why use BUSINESS_NAME</h1>
+          <h1 className="intro-title">Why use Cognizance</h1>
         </div>
         <div className="intro-description-container">
           <p className="intro-description">
@@ -18,7 +18,7 @@ function Intro() {
             passing day. Although more people are investing than ever in
             histroy, more people are losing money. Not the ultra wealthy, but
             working people who are trying to create a better future for
-            themselves and their families. BUSINESS_NAME's aim is to empower
+            themselves and their families. Cognizance's aim is to empower
             everyone to start using their hard earned money, to create more
             wealth with confidence. The keys to this software are:
           </p>
