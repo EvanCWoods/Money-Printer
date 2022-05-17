@@ -3,6 +3,9 @@
     display: flex;
     flex-wrap: wrap;
     background: var(--purple);
+    bottom: 0;
+    position: fixed;
+    width: 100%;
 }
 .footer-left {
     width: 50%;
@@ -27,4 +30,17 @@
 }
 .contact-info {
     color: white;
+}
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+    }
+    .footer-left, .footer-mid {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    .footer-left {
+        margin-bottom: 5%;
+    }
 }
