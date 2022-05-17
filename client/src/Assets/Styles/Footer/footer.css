@@ -3,8 +3,8 @@
     display: flex;
     flex-wrap: wrap;
     background: var(--purple);
-    bottom: 0;
-    position: fixed;
+    top: 100;
+    position: absolute;
     width: 100%;
 }
 .footer-left {
