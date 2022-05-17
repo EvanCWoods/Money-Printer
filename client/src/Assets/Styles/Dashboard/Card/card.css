@@ -12,6 +12,7 @@
     margin: 5% 1.5%;
     box-shadow: 0px 0px 10px 10px rgb(162, 162, 162);
     margin-bottom: 10%;
+    min-width: 200px;
 }
 
 .card-market-side {
@@ -58,4 +59,10 @@
 .action-title {
     padding-right: 3%;
     color: var(--grey-text);
+}
+
+@media  screen and (max-width: 500px) {
+    .current-position-percentage {
+        font-size: 0.7rem;
+    }
 }
