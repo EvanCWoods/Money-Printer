@@ -75,6 +75,8 @@ npm run develop
 ## Usage
 Once installed and running using the above commands, open the local app in your browser.
 
+The app is deployed on Heroku and acceessable here: https://evan-woods-final-project.herokuapp.com/
+
 
 ## Contribute
 This project is finished and requires no additional contributions
