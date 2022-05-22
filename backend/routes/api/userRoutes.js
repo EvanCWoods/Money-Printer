@@ -2,6 +2,11 @@ const router = require("express").Router();
 const userModel = require("../../models/user.js");
 const Auth = require("../../utils/auth.js");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+
+dotenv.config();
+const stripe = require("stripe")(process.env.STRIPE_KEY);
+
 
 router.post("/create", async (req, res) => {
   try {
@@ -39,4 +44,22 @@ router.post("/login", async (req, res) => {
     console.log(err);
   }
 });
+
+
+router.post("/checkout", async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+      mode: "subscription",
+      payment_method_types: ["card"],
+      line_items: [
+          {
+              price: "price_1L25OeG2lSfGD3plOofbaZag",
+          }
+      ], 
+      success_url: "http://localhost:3000/",
+      cancel_url: "http://localhost:3000/err"
+  })
+  res.send(session);
+});
+
+
 module.exports = router;
