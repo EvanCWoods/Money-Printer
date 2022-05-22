@@ -31,10 +31,6 @@ router.post("/login", async (req, res) => {
     if (user && isMatch) {
       const token = Auth.signToken(user);
 
-      console.log("DB: ", user.password);
-      console.log("REQ: ", req.body.password);
-      console.log("Correct: ", isMatch);
-
       res.status(200).json({ user, token });
     } else {
       res.json({ Data: "Login Invalid" });
