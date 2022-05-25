@@ -17,6 +17,8 @@
         "concurrently": "^5.1.0"
     },
     "dependencies": {
-        "cookie-parser": "^1.4.6"
+        "body-parser": "^1.20.0",
+        "cookie-parser": "^1.4.6",
+        "stripe": "^9.2.0"
     }
 }

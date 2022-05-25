@@ -21,11 +21,8 @@ router.get("/", async (req, res) => {
 		"MA200": results[results.length - 1].MA200,
 		"Signal": results[results.length - 1].Signal
     }
-    console.log("Current: ", currentData);
 
     let swapData;
-
-    console.log([ results.length, results[443] ])
 
     for (let i = 1; i < results.length; i++) {
         if (results[i].Signal != currentData.Signal) {
@@ -40,7 +37,6 @@ router.get("/", async (req, res) => {
         }
     }
 
-    console.log(swapData);
     
     let finalDataObject = {
         "OpenTimestamp": swapData.Timestamp,

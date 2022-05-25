@@ -28,7 +28,6 @@ function SignUp() {
         if (response.ok) {
           response.json().then((data) => {
             console.log(data.Token);
-            localStorage.setItem("super-secret", data.Token);
             fetch("/api/users/checkout", {
               method: "POST",
               mode: "cors",
@@ -37,10 +36,11 @@ function SignUp() {
               },
             }).then((response) => {
                 return response.json()
-            }).then((data) => {
-                document.location.replace(data.url);
+            }).then((redirect) => {
+                document.location.replace(redirect.url);
+                localStorage.setItem("super-secret", data.Token);
             })
-            // document.location.replace("/dashboard");
+            
           });
         }
       });
