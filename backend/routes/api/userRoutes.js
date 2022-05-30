@@ -14,6 +14,7 @@ router.post("/create", async (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
+      customer: {}
     });
     await user.save().then(() => {
       const token = Auth.signToken(user);
@@ -32,7 +33,6 @@ router.post("/login", async (req, res) => {
 
     if (user && isMatch) {
       const token = Auth.signToken(user);
-
       res.status(200).json({ user, token });
     } else {
       res.json({ Data: "Login Invalid" });

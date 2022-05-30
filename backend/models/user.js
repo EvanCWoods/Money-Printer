@@ -21,9 +21,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // subscription: {
-    //     type: String,
-    // },
+    customer: {
+        id: {
+            type: String
+        },
+        invoice_prefix: {
+            type: String
+        }
+    },
 })
 
 // compare the incoming password with the hashed password
