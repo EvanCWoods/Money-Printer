@@ -28,7 +28,7 @@ function SignUp() {
         if (response.ok) {
           response.json().then((data) => {
             console.log(data.Token);
-            fetch("/api/users/checkout", {
+            fetch("/checkout", {
               method: "POST",
               mode: "cors",
               headers: {

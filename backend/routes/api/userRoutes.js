@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 
 dotenv.config();
-const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 
 router.post("/create", async (req, res) => {
@@ -43,34 +42,29 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/checkout", async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    mode: "subscription",
-    payment_method_types: ["card"],
-    line_items: [
-      {
-        price: "price_1L2YLHG2lSfGD3plFg9KXqvk",
-        quantity: 1
-      }
-    ],
-    success_url: "http://localhost:3000/success",
-    success_url: "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url: "http://localhost:3000/error"
-  });
-  res.send(session);
-});
 
-router.get("/success", async (req, res) => {
-  try {
-    const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
-    const customer = await stripe.customers.retrieve(session.customer);
+// router.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
+//   const event = request.body;
 
-    res.send(customer);
-  } catch (err) {
-    console.log(err);
-    res.send(err);
-  }
-});
+//   // Handle the event
+//   switch (event.type) {
+//     case 'payment_intent.succeeded':
+//       const paymentIntent = event.data.object;
+//       console.log('PaymentIntent was successful!');
+//       break;
+//     case 'payment_method.attached':
+//       const paymentMethod = event.data.object;
+//       console.log('PaymentMethod was attached to a Customer!');
+//       break;
+//     // ... handle other event types
+//     default:
+//       console.log(`Unhandled event type ${event.type}`);
+//   }
+
+//   // Return a 200 response to acknowledge receipt of the event
+//   response.json({received: true});
+// });
+
 
 
 module.exports = router;
