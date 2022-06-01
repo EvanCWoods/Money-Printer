@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
         id: {
             type: String
         },
-        invoice_prefix: {
+        subscription: {
             type: String
         }
     },

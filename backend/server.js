@@ -56,9 +56,44 @@ app.post("/webhook", async (req, res) => {
     return;
   }
 
-  console.log(event.type);
-  console.log(event.data.object);
-  console.log(event.data.object.id);
+  // console.log(event.type);
+  // console.log(event.data.object);
+  // console.log(event.data.object.id);
+
+  switch (event.type) {
+    case "checkout.session.completed":
+      console.log(req.body.data);
+      const customerId = req.body.data.object.customer;
+      const subscriptionId = req.body.data.object.subscription;
+
+      console.log(customerId, subscriptionId);
+
+      await userModel.findOneAndUpdate(
+        { email: req.body.data.object.customer_details.email },
+        {
+          customer: {
+            id: req.body.data.object.customer,
+            subscription: req.body.data.object.subscription,
+          },
+        }
+      );
+      break;
+    case "payment_intent.succeeded":
+      const paymentIntent = event.data.object;
+      // console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
+      // console.log(paymentIntent);
+      // Then define and call a method to handle the successful payment intent.
+      // handlePaymentIntentSucceeded(paymentIntent);
+      break;
+    case "payment_method.attached":
+      const paymentMethod = event.data.object;
+      // Then define and call a method to handle the successful attachment of a PaymentMethod.
+      // handlePaymentMethodAttached(paymentMethod);
+      break;
+    default:
+      // Unexpected event type
+      console.log(`Unhandled event type ${event.type}.`);
+  }
 
   res.sendStatus(200);
 });
@@ -87,15 +122,6 @@ app.get("/success", async (req, res) => {
       req.query.session_id
     );
     const customer = await stripe.customers.retrieve(session.customer);
-    await userModel.findOneAndUpdate(
-      { email: customer.email },
-      {
-        customer: {
-          id: customer.id,
-          invoice_prefix: customer.invoice_prefix,
-        },
-      }
-    );
     res.send(customer);
   } catch (err) {
     console.log(err);
