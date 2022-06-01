@@ -1,8 +1,11 @@
 const express = require("express");
 const routes = require("./routes");
 const mongoConnection = require("./config/connection");
+const { MongoClient } = require("mongodb")
 const userModel = require("./models/user");
 const path = require("path");
+const generateApiKey = require("./utils/generateKey");
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -65,8 +68,12 @@ app.post("/webhook", async (req, res) => {
       console.log(req.body.data);
       const customerId = req.body.data.object.customer;
       const subscriptionId = req.body.data.object.subscription;
-
       console.log(customerId, subscriptionId);
+
+      // const client = new MongoClient(process.env.MONGO_URI, { useNewUrlParser: true });
+      // await client.connect();
+      // const cursor = client.db("users").collection("api_keys");
+      const {apiKey, hashedApiKey} = generateApiKey();
 
       await userModel.findOneAndUpdate(
         { email: req.body.data.object.customer_details.email },
@@ -75,8 +82,16 @@ app.post("/webhook", async (req, res) => {
             id: req.body.data.object.customer,
             subscription: req.body.data.object.subscription,
           },
-        }
+          apiKey: hashedApiKey
+        },
       );
+
+      // const currentUser = await userModel.findOne(
+      //   { email: req.body.data.object.customer_details.email })
+      
+      // const apiData = {hashedApiKey: currentUser._id}
+      // cursor.insertOne(apiData);
+
       break;
     case "payment_intent.succeeded":
       const paymentIntent = event.data.object;

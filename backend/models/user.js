@@ -29,6 +29,9 @@ const userSchema = new mongoose.Schema({
             type: String
         }
     },
+    apiKey: {
+        type: String
+    }
 })
 
 // compare the incoming password with the hashed password
