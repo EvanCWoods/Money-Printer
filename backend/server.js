@@ -48,7 +48,7 @@ app.post("/webhook", async (req, res) => {
   const payload = req.rawBody;
   const signature = req.headers["stripe-signature"];
   const enpointSecret =
-    "whsec_5384c10cc158ecdd9c3c4e0029355341c9f2b1fa5206edf288a964672f7fa48b";
+    "whsec_RAVhsPce8S4eGPYwDL2XhUqFN5B2JdJh";
 
   let event;
 
