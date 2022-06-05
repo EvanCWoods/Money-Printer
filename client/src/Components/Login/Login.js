@@ -28,9 +28,9 @@ function Login() {
         const data = await json;
         console.log("AWAITING RESPONSE");
         if(json) {
-            console.log(json);
-            localStorage.setItem("super-secret", data.Token);
-            await getUserData(data.email);
+            console.log(data.token);
+            localStorage.setItem("super-secret", data.token);
+            await getUserData(data.user.email);
             document.location.replace("/dashboard");
         }
     }
