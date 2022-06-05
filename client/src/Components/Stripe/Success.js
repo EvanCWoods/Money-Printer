@@ -23,7 +23,7 @@ function Success() {
       });
       const json = await response.json();
       const data = await json;
-      console.log(data.email);
+      console.log(data);
       setCustomer(data);
       getUserData(data.email);
     } catch (error) {
