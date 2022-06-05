@@ -14,7 +14,7 @@ function Success() {
   console.log(parameters);
 
   // useEffect(() => {
-  const url = `/success`;
+  const url = `/success?session_id=${parameters}`;
 
   const fetchData = async () => {
     try {

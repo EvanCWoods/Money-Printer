@@ -30,9 +30,9 @@ app.use("/images", express.static(path.join(__dirname, "../client/images")));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 }
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
@@ -134,6 +134,7 @@ app.post("/checkout", async (req, res) => {
 
 app.get("/success", async (req, res) => {
   try {
+    console.log(req.headers);
     const session = await stripe.checkout.sessions.retrieve(
       req.headers.session_id
     );
