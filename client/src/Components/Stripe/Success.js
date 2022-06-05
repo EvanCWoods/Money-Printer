@@ -28,8 +28,8 @@ function Success() {
       console.log("AWAITING FROM SIGN IN");
       if (json) {
         console.log(data);
-      setCustomer(data);
-      getUserData(data.email);
+        setCustomer(data);
+        getUserData(data.email);
       }
     } catch (error) {
       console.log("error", error);
