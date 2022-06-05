@@ -4,7 +4,7 @@ import Header from "../Reusable/Header.js";
 import getUserData from "../../utils/userData.js";
 
 function Login() {
-    function sendForm(event) {
+    async function sendForm(event) {
         event.preventDefault();
         const email = document.querySelector(".login-email").value;
         const password = document.querySelector(".login-password").value;
@@ -16,22 +16,22 @@ function Login() {
 
         console.log("SENDING RESPONSE");
         
-        fetch("/api/users/login", {
+        const response = await fetch("/api/users/login", {
             method: "POST",
             mode: "cors",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(user),
-        }).then((response) => {
-            console.log("AWAITING RESPONSE");
-            if(response.ok) {
-                console.log(response);
-                localStorage.setItem("super-secret", response.Token);
-                getUserData(email);
-                document.location.replace("/dashboard");
-            }
         })
+        const json = await response;
+        console.log("AWAITING RESPONSE");
+        if(json) {
+            console.log(json);
+            localStorage.setItem("super-secret", json.Token);
+            await getUserData(json.email);
+            document.location.replace("/dashboard");
+        }
     }
     return (
         <div className="login-container">
