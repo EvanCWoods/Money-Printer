@@ -45,7 +45,7 @@ app.post("/webhook", async (req, res) => {
   // let eventType;
 
   // Check if webhook signing is configured.
-  const payload = req.rawBody | req.body;
+  const payload = req.rawBody;
   const signature = req.headers["stripe-signature"];
   const enpointSecret =
     "whsec_RAVhsPce8S4eGPYwDL2XhUqFN5B2JdJh";
@@ -124,10 +124,10 @@ app.post("/checkout", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: "http://test-deployment-fp.herokuapp.com//success",
+    success_url: "http://test-deployment-fp.herokuapp.com/success",
     success_url:
-      "http://test-deployment-fp.herokuapp.com//success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url: "http://test-deployment-fp.herokuapp.com//error",
+      "http://test-deployment-fp.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
+    cancel_url: "http://test-deployment-fp.herokuapp.com/error",
   });
   res.send(session);
 });
