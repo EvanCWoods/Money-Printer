@@ -3,7 +3,7 @@ import Header from "../Reusable/Header.js";
 import "../../Assets/Styles/signUp/signUp.css";
 
 function SignUp() {
-  function sendForm(event) {
+  async function sendForm(event) {
     event.preventDefault();
     const firstName = document.querySelector(".firstName").value;
     const lastName = document.querySelector(".lastName").value;
@@ -17,35 +17,31 @@ function SignUp() {
       password: password,
     };
     if (password === confirmPassword) {
-      fetch("/api/users/create", {
+      const response = await fetch("/api/users/create", {
         method: "POST",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
-      }).then((response) => {
-        if (response.ok) {
-          response.json().then((data) => {
-            console.log(data.Token);
-            fetch("/checkout", {
+      })
+      const json = await response.json();
+      const data = await json;
+            console.log(data);
+            const checkout = await fetch("/checkout", {
               method: "POST",
               mode: "cors",
               headers: {
                 "Content-Type": "application/json",
               },
-            }).then((response) => {
-                return response.json()
-            }).then((redirect) => {
-                document.location.replace(redirect.url);
-                localStorage.setItem("super-secret", data.Token);
             })
-            
-          });
+            const checkoutJson = await checkout.json();
+            const redirect = await checkoutJson;
+            document.location.replace(redirect.url);
+            localStorage.setItem("super-secret", data.Token);
+          };
         }
-      });
-    }
-  }
+
   return (
     <div className="sign-up-container">
       <Header top="Unlock" bottom="the future" />
