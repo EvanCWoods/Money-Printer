@@ -5,6 +5,9 @@ const { MongoClient } = require("mongodb")
 const userModel = require("./models/user");
 const path = require("path");
 const generateApiKey = require("./utils/generateKey");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 
 const app = express();
@@ -44,8 +47,7 @@ app.post("/webhook", async (req, res) => {
   // Check if webhook signing is configured.
   const payload = req.rawBody;
   const signature = req.headers["stripe-signature"];
-  const enpointSecret =
-    "whsec_RAVhsPce8S4eGPYwDL2XhUqFN5B2JdJh";
+  const enpointSecret = process.env.STRIPE_WHS;
 
   let event;
 
@@ -121,10 +123,10 @@ app.post("/checkout", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: "http://test-deployment-fp.herokuapp.com/success",
+    success_url: "http://evan-woods-final-project.herokuapp.com/success",
     success_url:
-      "http://test-deployment-fp.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url: "http://test-deployment-fp.herokuapp.com/error",
+      "http://evan-woods-final-project.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
+    cancel_url: "http://evan-woods-final-project.herokuapp.com/error",
   });
   res.send(session);
 });
