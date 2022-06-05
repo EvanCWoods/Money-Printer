@@ -129,6 +129,11 @@ app.post("/checkout", async (req, res) => {
   res.send(session);
 });
 
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
 app.get("/success", async (req, res) => {
   try {
     console.log("SERVER 137: ", req.query);
@@ -144,9 +149,6 @@ app.get("/success", async (req, res) => {
   }
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
 
 app.listen(PORT, () => {
   console.log(`Running on port: ${PORT}!`);
