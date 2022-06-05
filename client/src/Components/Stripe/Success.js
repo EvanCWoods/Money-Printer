@@ -22,6 +22,7 @@ function Success() {
         method: "GET",
         headers: {session_id: parameters}
       });
+      console.log(response);
       const json = await response.json();
       console.log(json);
       const data = await json;
