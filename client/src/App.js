@@ -50,7 +50,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/success?success_id=:" element={ <Success />} />
+        <Route path="/success?session_id={CHECKOUT_SESSION_ID}" element={ <Success />} />
         <Route path="/account" element={ <Account />} />
       </Routes>
       <Footer />
