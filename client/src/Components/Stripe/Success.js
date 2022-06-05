@@ -22,15 +22,14 @@ function Success() {
         method: "GET",
         headers: { session_id: parameters },
       });
-      console.log(response);
       const json = await response.json();
-      console.log(json);
       const data = await json;
-      console.log("AWAITING FROM SIGN IN");
+      console.log("AWAITING RESPONSE");
       if (json) {
-        console.log(data);
-        setCustomer(data);
-        getUserData(data.email);
+        console.log(data.token);
+        localStorage.setItem("super-secret", data.token);
+        await getUserData(data.user.email);
+        document.location.replace("/dashboard");
       }
     } catch (error) {
       console.log("error", error);
