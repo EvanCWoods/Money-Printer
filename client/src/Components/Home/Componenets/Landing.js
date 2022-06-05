@@ -10,7 +10,7 @@ function Landing() {
                     <h1 className="landing-title">Of <span className="green-text">Finance.</span></h1>
                 </div>
             </div>
-            <div className="angle-bottom"><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br></div>
+            <div className="angle-bottom"><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br></div>
         </div>
     );
 }

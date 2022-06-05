@@ -62,6 +62,7 @@ app.post("/webhook", async (req, res) => {
   // console.log(event.type);
   // console.log(event.data.object);
   // console.log(event.data.object.id);
+  const {apiKey, hashedApiKey} = generateApiKey();
 
   switch (event.type) {
     case "checkout.session.completed":
@@ -73,7 +74,6 @@ app.post("/webhook", async (req, res) => {
       // const client = new MongoClient(process.env.MONGO_URI, { useNewUrlParser: true });
       // await client.connect();
       // const cursor = client.db("users").collection("api_keys");
-      const {apiKey, hashedApiKey} = generateApiKey();
 
       await userModel.findOneAndUpdate(
         { email: req.body.data.object.customer_details.email },
@@ -82,9 +82,10 @@ app.post("/webhook", async (req, res) => {
             id: req.body.data.object.customer,
             subscription: req.body.data.object.subscription,
           },
-          apiKey: hashedApiKey
+          apiKey: apiKey
         },
       );
+
 
       // const currentUser = await userModel.findOne(
       //   { email: req.body.data.object.customer_details.email })
@@ -110,7 +111,7 @@ app.post("/webhook", async (req, res) => {
       console.log(`Unhandled event type ${event.type}.`);
   }
 
-  res.sendStatus(200);
+  res.status(200);
 });
 
 app.post("/checkout", async (req, res) => {

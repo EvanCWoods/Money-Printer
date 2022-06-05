@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../Reusable/Header";
 import investmentGif from "../../Assets/Images/investment.png";
+import getUserData from "../../utils/userData";
 import "../../Assets/Styles/Succuss/success.css";
 
 function Success() {
@@ -21,8 +22,9 @@ function Success() {
         method: "GET",
       });
       const json = await response.json();
-      console.log(json);
+      console.log(json.email);
       setCustomer(json);
+      getUserData(json.email);
     } catch (error) {
       console.log("error", error);
     }
