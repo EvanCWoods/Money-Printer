@@ -22,6 +22,7 @@ function Success() {
         method: "GET",
       });
       const json = await response.json();
+      console.log(json);
       const data = await json;
       console.log(data);
       setCustomer(data);
