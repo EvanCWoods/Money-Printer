@@ -7,7 +7,9 @@ import SignUp from "./Components/SignUp/SignUp.js";
 import Login from "./Components/Login/Login.js";
 import Dashboard from "./Components/Dashboard/Dashboard.js"
 import Footer from "./Components/Footer/Footer.js";
+import Success from "./Components/Stripe/Success.js"
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Account from "./Components/User/Account.js";
 import "./Assets/Styles/root.css";
 
 
@@ -21,7 +23,7 @@ const ProtectedRoute = ({children }) => {
 };
 
 // Set a timer for clearing the JWT local storage
-const TIMER = setInterval(removeItem,1000 * 60 * 60);
+setInterval(removeItem,1000 * 60 * 60);
 function removeItem(){
 	  window.localStorage.removeItem("super-secret");
 }
@@ -48,6 +50,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/success" element={ <Success />} />
+        <Route path="/account" element={ <Account />} />
       </Routes>
       <Footer />
     </Router>

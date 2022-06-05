@@ -2,6 +2,10 @@ const router = require("express").Router();
 const userModel = require("../../models/user.js");
 const Auth = require("../../utils/auth.js");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 
 router.post("/create", async (req, res) => {
   try {
@@ -10,10 +14,10 @@ router.post("/create", async (req, res) => {
       lastName: req.body.lastName,
       email: req.body.email,
       password: req.body.password,
+      customer: {}
     });
     await user.save().then(() => {
       const token = Auth.signToken(user);
-      console.log(token);
       res.send({ Token: token });
     });
   } catch (err) {
@@ -26,15 +30,9 @@ router.post("/login", async (req, res) => {
     let token = req.query.token;
     const user = await userModel.findOne({ email: req.body.email });
     const isMatch = await user.isCorrectPassword(req.body.password);
-    console.log(isMatch);
 
     if (user && isMatch) {
       const token = Auth.signToken(user);
-
-      console.log("DB: ", user.password);
-      console.log("REQ: ", req.body.password);
-      console.log("Correct: ", isMatch);
-
       res.status(200).json({ user, token });
     } else {
       res.json({ Data: "Login Invalid" });
@@ -43,4 +41,11 @@ router.post("/login", async (req, res) => {
     console.log(err);
   }
 });
+
+router.post("/getUser", async (req, res) => {
+  const user = await userModel.findOne({ email: req.body.email });
+  res.status(200).json({ user });
+});
+
+
 module.exports = router;

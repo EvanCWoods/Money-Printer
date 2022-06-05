@@ -1,6 +1,7 @@
 import React from "react";
 import "../../Assets/Styles/Login/login.css";
 import Header from "../Reusable/Header.js";
+import getUserData from "../../utils/userData.js";
 
 function Login() {
     function sendForm(event) {
@@ -27,6 +28,7 @@ function Login() {
             if(response.ok) {
                 console.log(response);
                 localStorage.setItem("super-secret", response.Token);
+                getUserData(email);
                 document.location.replace("/dashboard");
             }
         })

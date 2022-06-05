@@ -9,7 +9,7 @@ function Header(props) {
                     <h1 className="landing-title">{props.bottom}</h1>
                 </div>
             </div>
-            <div className="angle-bottom"><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br></div>
+            <div className="angle-bottom"><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br></div>
         </div>
     )    
 }

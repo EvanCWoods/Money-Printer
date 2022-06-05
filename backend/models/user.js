@@ -21,9 +21,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // subscription: {
-    //     type: String,
-    // },
+    customer: {
+        id: {
+            type: String
+        },
+        subscription: {
+            type: String
+        }
+    },
+    apiKey: {
+        type: String
+    }
 })
 
 // compare the incoming password with the hashed password
