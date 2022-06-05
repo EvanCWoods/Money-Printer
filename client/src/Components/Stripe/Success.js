@@ -22,9 +22,10 @@ function Success() {
         method: "GET",
       });
       const json = await response.json();
-      console.log(json.email);
-      setCustomer(json);
-      getUserData(json.email);
+      const data = await json;
+      console.log(data.email);
+      setCustomer(data);
+      getUserData(data.email);
     } catch (error) {
       console.log("error", error);
     }
