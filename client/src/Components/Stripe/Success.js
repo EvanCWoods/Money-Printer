@@ -20,15 +20,18 @@ function Success() {
     try {
       const response = await fetch(url, {
         method: "GET",
-        headers: {session_id: parameters}
+        headers: { session_id: parameters },
       });
       console.log(response);
       const json = await response.json();
       console.log(json);
       const data = await json;
-      console.log(data);
-      setCustomer(data);
-      getUserData(data.email);
+      console.log("AWAITING FROM SIGN IN");
+      if (json) {
+        console.log(data);
+        setCustomer(data);
+        getUserData(data.email);
+      }
     } catch (error) {
       console.log("error", error);
     }
@@ -44,29 +47,35 @@ function Success() {
         bottom={customer?.name.split(" ")[0]}
         className="succuss-header"
       />
-      <div className="success-content-container"><div className="success-left">
-        <div className="success-header-container">
-          <p className="thank-you">Thank you for your purchase!</p>
-        </div>
-        <div className="succuss-directions">
-          <p className="success-text">
-            View the Dashboard to see the what makes Cognizance different.
-          </p>
-          <div className="succuss-buttons-container">
-            <Link to="/dashboard">
-              <button className="success-button dashboard-button">
-                Dashboard
-              </button>
-            </Link>
-            <Link to="/">
-              <button className="success-button home-button">Home</button>
-            </Link>
+      <div className="success-content-container">
+        <div className="success-left">
+          <div className="success-header-container">
+            <p className="thank-you">Thank you for your purchase!</p>
+          </div>
+          <div className="succuss-directions">
+            <p className="success-text">
+              View the Dashboard to see the what makes Cognizance different.
+            </p>
+            <div className="succuss-buttons-container">
+              <Link to="/dashboard">
+                <button className="success-button dashboard-button">
+                  Dashboard
+                </button>
+              </Link>
+              <Link to="/">
+                <button className="success-button home-button">Home</button>
+              </Link>
+            </div>
           </div>
         </div>
+        <div className="success-right">
+          <img
+            src={investmentGif}
+            alt="investment"
+            className="success-image"
+          ></img>
+        </div>
       </div>
-      <div className="success-right">
-        <img src={investmentGif} alt="investment" className="success-image"></img>
-      </div></div>
     </div>
   );
 }
