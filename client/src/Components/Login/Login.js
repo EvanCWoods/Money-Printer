@@ -24,12 +24,13 @@ function Login() {
             },
             body: JSON.stringify(user),
         })
-        const json = await response;
+        const json = await response.json();
+        const data = await json;
         console.log("AWAITING RESPONSE");
         if(json) {
             console.log(json);
-            localStorage.setItem("super-secret", json.Token);
-            await getUserData(json.email);
+            localStorage.setItem("super-secret", data.Token);
+            await getUserData(data.email);
             document.location.replace("/dashboard");
         }
     }
