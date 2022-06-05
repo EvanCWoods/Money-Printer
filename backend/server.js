@@ -129,7 +129,7 @@ app.post("/checkout", async (req, res) => {
       "http://test-deployment-fp.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
     cancel_url: "http://test-deployment-fp.herokuapp.com/error",
   });
-  res.send(session);
+  res.json(session);
 });
 
 app.get("/success", async (req, res) => {
@@ -141,7 +141,7 @@ app.get("/success", async (req, res) => {
     console.log("SERVER 141: ", session);
     const customer = await stripe.customers.retrieve(session.customer);
     console.log("SERVER 143: ", customer);
-    res.send(customer);
+    res.status(200).json(customer);
   } catch (err) {
     console.log(err);
     res.send(err);
