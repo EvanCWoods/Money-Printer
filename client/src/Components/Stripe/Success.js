@@ -14,12 +14,13 @@ function Success() {
   console.log(parameters);
 
   // useEffect(() => {
-  const url = `/success?session_id=${parameters}`;
+  const url = `/success`;
 
   const fetchData = async () => {
     try {
       const response = await fetch(url, {
         method: "GET",
+        headers: {session_id: parameters}
       });
       const json = await response.json();
       console.log(json);
