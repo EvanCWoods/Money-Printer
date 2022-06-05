@@ -31,10 +31,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 }
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
-
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 app.post("/webhook", async (req, res) => {
@@ -146,6 +142,10 @@ app.get("/success", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
 app.listen(PORT, () => {
