@@ -5,6 +5,8 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 
 dotenv.config();
+const stripe = require("stripe")(process.env.STRIPE_KEY);
+
 
 
 router.post("/create", async (req, res) => {
@@ -37,6 +39,21 @@ router.post("/login", async (req, res) => {
     } else {
       res.json({ Data: "Login Invalid" });
     }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/success", async (req, res) => {
+  try {
+    console.log("SERVER 137: ", req.query);
+    const session = await stripe.checkout.sessions.retrieve(
+      req.query.session_id
+    );
+    console.log("SERVER 141: ", session);
+    const customer = await stripe.customers.retrieve(session.customer);
+    console.log("SERVER 143: ", customer);
+    res.status(200).send(customer);
   } catch (err) {
     console.log(err);
   }
