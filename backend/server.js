@@ -134,9 +134,9 @@ app.post("/checkout", async (req, res) => {
 
 app.get("/success", async (req, res) => {
   try {
-    console.log("SERVER 137: ", req.headers);
+    console.log("SERVER 137: ", req.query);
     const session = await stripe.checkout.sessions.retrieve(
-      req.headers.session_id
+      req.query.session_id
     );
     console.log("SERVER 141: ", session);
     const customer = await stripe.customers.retrieve(session.customer);

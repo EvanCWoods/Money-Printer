@@ -19,8 +19,7 @@ function Success() {
   const fetchData = async () => {
     try {
       const response = await fetch(url, {
-        method: "GET",
-        headers: { session_id: parameters },
+        method: "GET"
       });
       const json = await response.json();
       const data = await json;
