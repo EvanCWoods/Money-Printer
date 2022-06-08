@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../Assets/Styles/User/account.css";
+import Header from "../Reusable/Header.js";
 
 function Account() {
   const [userData, setUserData] = useState();
@@ -11,23 +12,39 @@ function Account() {
   return (
     <div className="account-container">
       <div className="account-details-container">
-        <p>
-          Hi,{" "}
-          {userData?.firstName.charAt(0).toUpperCase() +
-            userData?.firstName.slice(1)}{" "}
-          {userData?.lastName.charAt(0).toUpperCase() +
-            userData?.lastName.slice(1)}
-        </p>
+        <Header top={`Hi, ${userData?.firstName.charAt(0).toUpperCase()}`} />
         <div className="api-container">
-          <p>
-            Here is your API key. Ensure that you keep this safe and treat it as
+          <p className="api-title">
+            Here is your API key. <br></br> Ensure that you keep this safe and treat it as
             if It's a password.
           </p>
           <br></br>
-          <p>API Key: {userData?.apiKey}</p>
+          <div className="api-key-container"><p><span className="bold-text">API Key: </span> {userData?.apiKey}</p></div>
+          <br></br>
           <div className="api-tutorial-container">
-              <p>Use your API key in the header of your requests as seen below:</p>
+              <p>This API is built to be easy to use. Simply use your API key in the header of your request and you're using Cognizance's data.</p>
+              <br></br>
+              <div className="tutorial-container">
+                <p className="sample-request">{"fetch('https://evan-woods-final-project.herokuapp.com/api/current/btc', {"}</p>
+                <p className="sample-request-method">{"method: 'GET'"}</p>
+                <p className="sample-request-mode">{"mode: 'cors'"}</p>
+                <p className="sample-request-headers">{"headers: {"}</p>
+                <p className="sample-request-headers">{"'content-type': 'application/json'"}</p>
+                <p className="sample-request-headers">{"apikey: YOUR_API_KEY"}</p>
+                <p className="sample-request-headers">{" }"}</p>
+                <p className="sample-request">{" });"}</p>
+              </div>
           </div>
+          <div className="endpoints-list">
+                <div className="endpoint-container">
+                  <p className="endpoint-title">GET all BTC data</p>
+                  <p className="endpoint">https://evan-woods-final-project.herokuapp.com/api/all/btc</p>
+                </div>
+                <div className="endpoint-container">
+                  <p className="endpoint-title">GET current BTC data</p>
+                  <p className="endpoint">https://evan-woods-final-project.herokuapp.com/api/current/btc</p>
+                </div>
+              </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,42 @@
 .api-container {
     width: 80%;
     margin: 10%;
+    font-size: 1.2rem;
+}
+.api-key-container {
+    background: rgb(215, 215, 215);
+    padding: 3% 0 3% 0;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+}
+.bold-text {
+    font-weight: bold;
+}
+.sample-request-headers {
+    margin-left: 4%;
+}
+.sample-request-method,
+.sample-request-mode {
+    margin-left: 2%;
+}
+.tutorial-container {
+    background: rgb(215, 215, 215);
+    padding: 2% 0 2% 2%;
+    width: 60%;
+}
+.endpoints-list {
+    background: none;
+    margin-top: 5%;
+    background: none;
+}
+.endpoint-container {
+    margin-top: 3%;
+}
+.endpoint {
+    background:rgb(215, 215, 215);
+    border-radius: 5px;
+    padding: 1% 0 1% 4%;
+    width: 50%;
 }
