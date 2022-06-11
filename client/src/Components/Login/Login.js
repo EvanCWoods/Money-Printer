@@ -25,7 +25,9 @@ function Login() {
             body: JSON.stringify(user),
         })
         const json = await response.json();
+        console.log(json);
         const data = await json;
+        console.log(data);
         console.log("AWAITING RESPONSE");
         if(json) {
             console.log(data.token);

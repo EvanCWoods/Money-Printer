@@ -5,7 +5,7 @@ import "../../Assets/Styles/Dashboard/dashboard.css";
 function Dashboard() {
 
     let recomendation = "";
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         const url = "/api/data/";
@@ -34,7 +34,9 @@ function Dashboard() {
     }
     return(
         <div className="dashboard-container">
-            <Card color={data.Signal} ticker={data.Ticker} price={`$${data.LastClose}`} marketSide={data.Signal} currentPercentage={`${data.Performance}%`} duration={`${data.Duration} Days`} Recomendation={recomendation}/>
+            {data ? data?.map((asset) => (
+                <Card color={asset.Signal} ticker={asset.Ticker} price={`$${asset.LastClose}`} marketSide={asset.Signal} currentPercentage={`${asset.Performance}%`} duration={`${asset.Duration} Days`} Recomendation={recomendation}/>
+            )) : null}
             <Card color="Buy" ticker="AAPL" price="$199.23" marketSide="Buy" currentPercentage="12%" duration="41 Days" Recomendation="Hold"/>
             <Card color="Sell" ticker="TSLA" price="$724.37" marketSide="Sell" currentPercentage="-1.3%" duration="1 Days" Recomendation="Hold"/>
             <Card color="Sell" ticker="ETH" price="$2071" marketSide="Sell" currentPercentage="36%" duration="19 Days" Recomendation="Buy"/>
