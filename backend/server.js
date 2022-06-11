@@ -47,7 +47,7 @@ app.post("/webhook", async (req, res) => {
   // Check if webhook signing is configured.
   const payload = req.rawBody;
   const signature = req.headers["stripe-signature"];
-  const enpointSecret = process.env.STRIPE_WHS;
+  const enpointSecret = "whsec_RAVhsPce8S4eGPYwDL2XhUqFN5B2JdJh";
 
   let event;
 

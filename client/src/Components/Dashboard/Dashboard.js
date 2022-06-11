@@ -39,7 +39,6 @@ function Dashboard() {
             )) : null}
             <Card color="Buy" ticker="AAPL" price="$199.23" marketSide="Buy" currentPercentage="12%" duration="41 Days" Recomendation="Hold"/>
             <Card color="Sell" ticker="TSLA" price="$724.37" marketSide="Sell" currentPercentage="-1.3%" duration="1 Days" Recomendation="Hold"/>
-            <Card color="Sell" ticker="ETH" price="$2071" marketSide="Sell" currentPercentage="36%" duration="19 Days" Recomendation="Buy"/>
         </div>
     );
 }
