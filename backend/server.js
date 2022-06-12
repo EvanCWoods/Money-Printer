@@ -47,10 +47,10 @@ app.use((req, res, next) => {
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 
-app.post("/webhook", async (req, res) => {
+app.post("/webhook", express.raw({type: 'application/json'}), async (req, res) => {
 
   // Check if webhook signing is configured.
-  const payload = req.rawBody;
+  const payload = req.body;
   console.log("PAYLOAD: ", payload);
   const signature = req.headers["stripe-signature"];
   console.log("SIGNATURE: ", signature);
