@@ -18,8 +18,6 @@ async function getUserData(email) {
       email: data.user.email,
       firstName: data.user.firstName,
       lastName: data.user.lastName,
-      subscription: data.user.customer.subscription,
-      stripeId: data.user.customer.id,
       apiKey: data.user.apiKey,
     }));
   }
