@@ -71,11 +71,11 @@ app.post("/webhook", async (req, res) => {
   const {apiKey, hashedApiKey} = generateApiKey();
 
   switch (event.type) {
-    case "checkout.session.completed":
-      console.log("CHECKOUT: ", req.body.data);
+    case "customer.subscription.created":
+      console.log("SUBSCRIPTION: ", req.body.data);
       const customerId = req.body.data.object.customer;
       const subscriptionId = req.body.data.object.subscription;
-      console.log("CHECKOUT COMPLETE: ", customerId, subscriptionId);
+      console.log("SUBSCRIPTION COMPLETE: ", customerId, subscriptionId);
 
       // const client = new MongoClient(process.env.MONGO_URI, { useNewUrlParser: true });
       // await client.connect();
