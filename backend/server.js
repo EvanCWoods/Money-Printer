@@ -119,7 +119,7 @@ app.post("/checkout", async (req, res) => {
     payment_method_types: ["card"],
     line_items: [
       {
-        price: "price_1L2YLHG2lSfGD3plFg9KXqvk",
+        price: "price_1L9fsWG2lSfGD3plomTmFphV",
         quantity: 1,
       },
     ],
