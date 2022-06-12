@@ -86,11 +86,11 @@ app.post("/webhook", async (req, res) => {
 
       await userModel.findOneAndUpdate(
         { email: req.body.data.object.customer_details.email },
-        {
-          customer: {
-            id: req.body.data.object.customer,
-            subscription: req.body.data.object.subscription,
-          },
+        // {
+        //   customer: {
+        //     id: req.body.data.object.customer,
+        //     subscription: req.body.data.object.subscription,
+        //   },
           apiKey: apiKey
         },
       );
