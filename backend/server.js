@@ -23,15 +23,24 @@ const PORT = process.env.PORT || 3001;
 // });
 
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "client/build")));
-app.use(
-  express.json({
-    verify: (req, res, buf) => {
-      req.rawBody = buf;
-    },
-  })
-  );
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.static(path.join(__dirname, "client/build")));
+// app.use(
+//   express.json({
+//     verify: (req, res, buf) => {
+//       req.rawBody = buf;
+//     },
+//   })
+//   );
+
+app.use((req, res, next) => {
+  if (req.originalUrl === '/webhook') {
+    next();
+  } else {
+    express.json()(req, res, next);
+  }
+});
+
 app.use(routes);
 
 mongoConnection();
@@ -49,21 +58,21 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 app.post("/webhook", async (req, res) => {
 
   // Check if webhook signing is configured.
-  // const payload = req.rawBody;
-  // console.log("PAYLOAD: ", payload);
-  // const signature = req.headers["stripe-signature"];
-  // console.log("SIGNATURE: ", signature);
-  // const enpointSecret = "whsec_RAVhsPce8S4eGPYwDL2XhUqFN5B2JdJh";
+  const payload = req.rawBody || req.body;
+  console.log("PAYLOAD: ", payload);
+  const signature = req.headers["stripe-signature"];
+  console.log("SIGNATURE: ", signature);
+  const enpointSecret = "whsec_RAVhsPce8S4eGPYwDL2XhUqFN5B2JdJh";
 
-  // let event;
+  let event;
 
-  // try {
-  //   event = stripe.webhooks.constructEvent(payload, signature, enpointSecret);
-  //   console.log("EVENT: ", event)
-  // } catch (err) {
-  //   console.log(err);
-  //   return;
-  // }
+  try {
+    event = stripe.webhooks.constructEvent(payload, signature, enpointSecret);
+    console.log("EVENT: ", event)
+  } catch (err) {
+    console.log(err);
+    return;
+  }
 
   // console.log(event.type);
   // console.log(event.data.object);
@@ -72,13 +81,13 @@ app.post("/webhook", async (req, res) => {
 
 
 
-// // todo: try taking out any event types and firing the api code on webhook firing to get something working.
-//   switch (event.type) {
-//     case "customer.subscription.created":
-//       console.log("SUBSCRIPTION: ", req.body.data);
-//       const customerId = req.body.data.object.customer;
-//       const subscriptionId = req.body.data.object.subscription;
-//       console.log("SUBSCRIPTION COMPLETE: ", customerId, subscriptionId);
+// todo: try taking out any event types and firing the api code on webhook firing to get something working.
+  switch (event.type) {
+    case "customer.subscription.created":
+      console.log("SUBSCRIPTION: ", req.body.data);
+      const customerId = req.body.data.object.customer;
+      const subscriptionId = req.body.data.object.subscription;
+      console.log("SUBSCRIPTION COMPLETE: ", customerId, subscriptionId);
 
       // const client = new MongoClient(process.env.MONGO_URI, { useNewUrlParser: true });
       // await client.connect();
@@ -86,19 +95,19 @@ app.post("/webhook", async (req, res) => {
 
       await userModel.findOneAndUpdate(
         { email: req.body.data.object.customer_details.email },
-        // {
-        //   customer: {
-        //     id: req.body.data.object.customer,
-        //     subscription: req.body.data.object.subscription,
-        //   },
+        {
+          customer: {
+            id: req.body.data.object.customer,
+            subscription: req.body.data.object.subscription,
+          },
           apiKey: apiKey
         },
       );
-    //   break;
-    // default:
-    //   // Unexpected event type
-    //   console.log(`Unhandled event type ${event.type}.`);
-  // }
+      break;
+    default:
+      // Unexpected event type
+      console.log(`Unhandled event type ${event.type}.`);
+  }
 
   res.status(200);
 });
