@@ -10,38 +10,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 
-const app = express();
-const PORT = process.env.PORT || 3001;
 
-
-// app.use((req, res, next) => {
-//   if (req.originalUrl === '/webhook') {
-//     next(); // Do nothing with the body because I need it in a raw state.
-//   } else {
-//     express.json()(req, res, next);  // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
-//   }
-// });
-
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "client/build")));
-app.use(
-  express.json({
-    verify: (req, res, buf) => {
-      req.rawBody = buf;
-    },
-  })
-  );
-app.use(routes);
-
-mongoConnection();
-
-// Uncomment for deployment
-
-app.use("/images", express.static(path.join(__dirname, "../client/images")));
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-}
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
@@ -104,6 +73,43 @@ app.post("/webhook", async (req, res) => {
 
   res.status(200);
 });
+
+
+
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+
+// app.use((req, res, next) => {
+//   if (req.originalUrl === '/webhook') {
+//     next(); // Do nothing with the body because I need it in a raw state.
+//   } else {
+//     express.json()(req, res, next);  // ONLY do express.json() if the received request is NOT a WebHook from Stripe.
+//   }
+// });
+
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "client/build")));
+app.use(
+  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf;
+    },
+  })
+  );
+app.use(routes);
+
+mongoConnection();
+
+// Uncomment for deployment
+
+app.use("/images", express.static(path.join(__dirname, "../client/images")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+}
+
 
 app.post("/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
