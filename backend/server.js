@@ -45,7 +45,8 @@ app.post("/webhook", async (req, res) => {
   // let eventType;
 
   // Check if webhook signing is configured.
-  const payload = req.rawBody || req.body;
+  const payload = req.rawBody;
+  console.log.og(payload);
   const signature = req.headers["stripe-signature"];
   const enpointSecret = "whsec_RAVhsPce8S4eGPYwDL2XhUqFN5B2JdJh";
 
@@ -99,7 +100,7 @@ app.post("/checkout", async (req, res) => {
     payment_method_types: ["card"],
     line_items: [
       {
-        price: "price_1L9fsWG2lSfGD3plomTmFphV",
+        price: "price_1L9iNMHqRrLitJJQhEnD4yOI",
         quantity: 1,
       },
     ],
