@@ -9,8 +9,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-
-
+const app = express();
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
@@ -74,10 +73,6 @@ app.post("/webhook", async (req, res) => {
   res.status(200);
 });
 
-
-
-
-const app = express();
 const PORT = process.env.PORT || 3001;
 
 
