@@ -23,25 +23,15 @@ const PORT = process.env.PORT || 3001;
 // });
 
 
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.static(path.join(__dirname, "client/build")));
-// app.use(
-//   express.json({
-//     verify: (req, res, buf) => {
-//       req.rawBody = buf;
-//     },
-//   })
-//   );
-
-app.use((req, res, next) => {
-  console.log("LOCATION: ", req.originalUrl);
-  if (req.originalUrl === '/webhook') {
-    next();
-  } else {
-    express.json()(req, res, next);
-  }
-});
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "client/build")));
+app.use(
+  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf;
+    },
+  })
+);
 // Uncomment for deployment
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
@@ -110,10 +100,10 @@ app.use(routes);
 
 mongoConnection();
 
-app.use("/images", express.static(path.join(__dirname, "../client/images")));
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-}
+// app.use("/images", express.static(path.join(__dirname, "../client/images")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../client/build")));
+// }
 
 app.post("/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
@@ -125,17 +115,17 @@ app.post("/checkout", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: "https://fp-test-deployment.herokuapp.com/success",
+    success_url: "http://localhost:3000/success",
     success_url:
-      "https://fp-test-deployment.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url: "https://fp-test-deployment.herokuapp.com/error",
+      "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
+    cancel_url: "http:localhost:3000/error",
   });
   res.send(session);
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
 app.listen(PORT, () => {
   console.log(`Running on port: ${PORT}!`);
