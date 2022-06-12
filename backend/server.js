@@ -32,7 +32,6 @@ app.use(
     },
   })
   );
-app.use(URLConfig.URL_API + '/webhooks', express.raw({ type: 'application/json' }), WebHooksRoutes)
 app.use(routes);
 
 mongoConnection();
