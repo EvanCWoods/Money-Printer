@@ -110,10 +110,10 @@ app.post("/checkout", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: "http://evan-woods-final-project.herokuapp.com/success",
+    success_url: "https://https://fp-test-deployment.herokuapp.com/success",
     success_url:
-      "http://evan-woods-final-project.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url: "http://evan-woods-final-project.herokuapp.com/error",
+      "https://https://fp-test-deployment.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
+    cancel_url: "https://https://fp-test-deployment.herokuapp.com/error",
   });
   res.send(session);
 });
