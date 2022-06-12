@@ -46,8 +46,9 @@ app.post("/webhook", async (req, res) => {
 
   // Check if webhook signing is configured.
   const payload = req.rawBody;
-  console.log(payload);
+  console.log("PAYLOAD: ", payload);
   const signature = req.headers["stripe-signature"];
+  console.log("SIGNATURE: ", signature);
   const enpointSecret = "whsec_RAVhsPce8S4eGPYwDL2XhUqFN5B2JdJh";
 
   let event;
@@ -67,6 +68,7 @@ app.post("/webhook", async (req, res) => {
 
   switch (event.type) {
     case "checkout.session.completed":
+      console.log("CHECKOUT: ", req.body.data);
       const customerId = req.body.data.object.customer;
       const subscriptionId = req.body.data.object.subscription;
       console.log("CHECKOUT COMPLETE: ", customerId, subscriptionId);
