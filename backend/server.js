@@ -53,6 +53,7 @@ app.post("/webhook", async (req, res) => {
 
   try {
     event = stripe.webhooks.constructEvent(payload, signature, enpointSecret);
+    console.log("EVENT: ", event)
   } catch (err) {
     console.log(err);
     return;
@@ -65,10 +66,9 @@ app.post("/webhook", async (req, res) => {
 
   switch (event.type) {
     case "checkout.session.completed":
-      console.log(req.body.data);
       const customerId = req.body.data.object.customer;
       const subscriptionId = req.body.data.object.subscription;
-      console.log(customerId, subscriptionId);
+      console.log("CHECKOUT COMPLETE: ", customerId, subscriptionId);
 
       // const client = new MongoClient(process.env.MONGO_URI, { useNewUrlParser: true });
       // await client.connect();
@@ -84,26 +84,6 @@ app.post("/webhook", async (req, res) => {
           apiKey: apiKey
         },
       );
-
-
-      // const currentUser = await userModel.findOne(
-      //   { email: req.body.data.object.customer_details.email })
-      
-      // const apiData = {hashedApiKey: currentUser._id}
-      // cursor.insertOne(apiData);
-
-      break;
-    case "payment_intent.succeeded":
-      const paymentIntent = event.data.object;
-      // console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
-      // console.log(paymentIntent);
-      // Then define and call a method to handle the successful payment intent.
-      // handlePaymentIntentSucceeded(paymentIntent);
-      break;
-    case "payment_method.attached":
-      const paymentMethod = event.data.object;
-      // Then define and call a method to handle the successful attachment of a PaymentMethod.
-      // handlePaymentMethodAttached(paymentMethod);
       break;
     default:
       // Unexpected event type
