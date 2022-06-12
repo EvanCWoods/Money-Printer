@@ -70,8 +70,7 @@ app.post("/webhook", async (req, res) => {
   // console.log(event.data.object.id);
   const {apiKey, hashedApiKey} = generateApiKey();
 
-  switch (event.type) {
-    case "customer.subscription.created":
+  if (event) {
       console.log("SUBSCRIPTION: ", req.body.data);
       const customerId = req.body.data.object.customer;
       const subscriptionId = req.body.data.object.subscription;
@@ -91,10 +90,6 @@ app.post("/webhook", async (req, res) => {
           apiKey: apiKey
         },
       );
-      break;
-    default:
-      // Unexpected event type
-      console.log(`Unhandled event type ${event.type}.`);
   }
 
   res.status(200);
