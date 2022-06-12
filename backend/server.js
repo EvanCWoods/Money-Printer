@@ -23,21 +23,31 @@ const PORT = process.env.PORT || 3001;
 // });
 
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "client/build")));
-app.use(
-  express.json({
-    verify: (req, res, buf) => {
-      req.rawBody = buf;
-    },
-  })
-);
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.static(path.join(__dirname, "client/build")));
+// app.use(
+//   express.json({
+//     verify: (req, res, buf) => {
+//       req.rawBody = buf;
+//     },
+//   })
+//   );
+
+app.use((req, res, next) => {
+  console.log("LOCATION: ", req.originalUrl);
+  if (req.originalUrl === '/webhook') {
+    next();
+  } else {
+    express.json()(req, res, next);
+  }
+});
+
 // Uncomment for deployment
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 
-app.post("/webhook", async (req, res) => {
+app.post("/webhook", express.raw({type: 'application/json'}), async (req, res) => {
 
   // Check if webhook signing is configured.
   const payload = req.body;
@@ -115,10 +125,10 @@ app.post("/checkout", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: "http://localhost:3000/success",
+    success_url: "https://fp-test-deployment.herokuapp.com/success",
     success_url:
-      "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url: "http:localhost:3000/error",
+      "https://fp-test-deployment.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
+    cancel_url: "https://fp-test-deployment.herokuapp.com/error",
   });
   res.send(session);
 });
