@@ -45,8 +45,9 @@ if (process.env.NODE_ENV === "production") {
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
+
 app.post("/webhook", async (req, res) => {
-  
+
   // Check if webhook signing is configured.
   const payload = req.rawBody;
   console.log("PAYLOAD: ", payload);
