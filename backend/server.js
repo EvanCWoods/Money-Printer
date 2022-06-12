@@ -46,13 +46,7 @@ if (process.env.NODE_ENV === "production") {
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 app.post("/webhook", async (req, res) => {
-  // const event = req.body;
-  // console.log(event.type);
-  // console.log(event.data.object);
-  // console.log(event.data.object.id);
-  // let data;
-  // let eventType;
-
+  
   // Check if webhook signing is configured.
   const payload = req.rawBody;
   console.log("PAYLOAD: ", payload);
@@ -122,22 +116,6 @@ app.post("/checkout", async (req, res) => {
   });
   res.send(session);
 });
-
-
-// app.get("/success", async (req, res) => {
-//   try {
-//     console.log("SERVER 137: ", req.query);
-//     const session = await stripe.checkout.sessions.retrieve(
-//       req.query.session_id
-//     );
-//     console.log("SERVER 141: ", session);
-//     const customer = await stripe.customers.retrieve(session.customer);
-//     console.log("SERVER 143: ", customer);
-//     res.status(200).send(customer);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
