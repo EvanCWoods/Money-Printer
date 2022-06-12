@@ -34,6 +34,7 @@ const PORT = process.env.PORT || 3001;
 //   );
 
 app.use((req, res, next) => {
+  console.log("LOCATION: ", req.originalUrl);
   if (req.originalUrl === '/webhook') {
     next();
   } else {
@@ -41,16 +42,7 @@ app.use((req, res, next) => {
   }
 });
 
-app.use(routes);
-
-mongoConnection();
-
 // Uncomment for deployment
-
-app.use("/images", express.static(path.join(__dirname, "../client/images")));
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-}
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
@@ -58,7 +50,7 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 app.post("/webhook", async (req, res) => {
 
   // Check if webhook signing is configured.
-  const payload = req.rawBody || req.body;
+  const payload = req.rawBody;
   console.log("PAYLOAD: ", payload);
   const signature = req.headers["stripe-signature"];
   console.log("SIGNATURE: ", signature);
@@ -111,6 +103,17 @@ app.post("/webhook", async (req, res) => {
 
   res.status(200);
 });
+
+
+
+app.use(routes);
+
+mongoConnection();
+
+app.use("/images", express.static(path.join(__dirname, "../client/images")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+}
 
 app.post("/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
