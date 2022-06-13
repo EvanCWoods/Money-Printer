@@ -24,7 +24,7 @@ const PORT = process.env.PORT || 3001;
 
 
 app.use(express.urlencoded({ extended: true }));
-// app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "client/build")));
 app.use(
   express.json({
     verify: (req, res, buf) => {
@@ -43,7 +43,7 @@ app.post("/webhook", async (req, res) => {
   // Check if webhook signing is configured.
   const payload = req.rawBody;
   const signature = req.headers["stripe-signature"];
-  const endpointSecret = process.env.STRIPE_WHS;
+  const endpointSecret = process.env.STRIPE_HWS;
 
   let event;
 
@@ -64,18 +64,6 @@ app.post("/webhook", async (req, res) => {
 // todo: try taking out any event types and firing the api code on webhook firing to get something working.
   switch (event.type) {
     case "checkout.session.completed":
-      // const customerId = req.body.data.object.customer;
-      // const subscriptionId = req.body.data.object.subscription;
-
-      // const client = new MongoClient(process.env.MONGO_URI, { useNewUrlParser: true });
-      // await client.connect();
-      // const cursor = client.db("users").collection("api_keys");
-
-
-
-      // console.log(req.body.object.customer, "\n\n\n\n")
-      // console.log(req.body.object.customer_details, "\n\n\n\n\n")
-      // console.log(req.body.object.subscription, "\n\n\n\n\new")
       await userModel.findOneAndUpdate(
         { email: req.body.data.object.customer_details.email },
         {
@@ -116,10 +104,10 @@ app.post("/checkout", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: "https://fp-test-deployment.herokuapp.com/success",
+    success_url: "http://evan-woods-final-project.herokuapp.com/success",
     success_url:
-      "https://fp-test-deployment.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url: "https://fp-test-deployment.herokuapp.com/error",
+      "http://evan-woods-final-project.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
+    cancel_url: "http://evan-woods-final-project.herokuapp.com/error",
   });
   res.send(session);
 });

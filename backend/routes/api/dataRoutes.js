@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const client = new MongoClient(process.env.MONGO_URI, { useNewUrlParser: true });
     await client.connect();
 
-    const endpoints = ["bitcoin", "ethereum"]
+    const endpoints = ["bitcoin", "ethereum", "binance"]
     let dataArray = [];
     for (let i = 0; i < endpoints.length; i++) {
         const cursor = client.db("algorithm").collection(endpoints[i]).find(
