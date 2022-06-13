@@ -23,44 +23,32 @@ const PORT = process.env.PORT || 3001;
 // });
 
 
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, "client/build")));
-// app.use(
-//   express.json({
-//     verify: (req, res, buf) => {
-//       req.rawBody = buf;
-//     },
-//   })
-//   );
-
-app.use((req, res, next) => {
-  console.log("LOCATION: ", req.originalUrl);
-  if (req.originalUrl === '/webhook') {
-    next();
-  } else {
-    express.json()(req, res, next);
-  }
-});
+app.use(
+  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf;
+    },
+  })
+  );
 
 // Uncomment for deployment
 
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 
-app.post("/webhook", express.raw({type: 'application/json'}), async (req, res) => {
+app.post("/webhook", async (req, res) => {
 
   // Check if webhook signing is configured.
-  const payload = req.body;
-  console.log("PAYLOAD: ", payload);
+  const payload = req.rawBody;
   const signature = req.headers["stripe-signature"];
-  console.log("SIGNATURE: ", signature);
-  const enpointSecret = "whsec_RAVhsPce8S4eGPYwDL2XhUqFN5B2JdJh";
+  const endpointSecret = process.env.STRIPE_WHS;
 
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(payload, signature, enpointSecret);
-    console.log("EVENT: ", event)
+    event = stripe.webhooks.constructEvent(payload, signature, endpointSecret);
   } catch (err) {
     console.log(err);
     return;
@@ -75,16 +63,19 @@ app.post("/webhook", express.raw({type: 'application/json'}), async (req, res) =
 
 // todo: try taking out any event types and firing the api code on webhook firing to get something working.
   switch (event.type) {
-    case "customer.subscription.created":
-      console.log("SUBSCRIPTION: ", req.body.data);
-      const customerId = req.body.data.object.customer;
-      const subscriptionId = req.body.data.object.subscription;
-      console.log("SUBSCRIPTION COMPLETE: ", customerId, subscriptionId);
+    case "checkout.session.completed":
+      // const customerId = req.body.data.object.customer;
+      // const subscriptionId = req.body.data.object.subscription;
 
       // const client = new MongoClient(process.env.MONGO_URI, { useNewUrlParser: true });
       // await client.connect();
       // const cursor = client.db("users").collection("api_keys");
 
+
+
+      // console.log(req.body.object.customer, "\n\n\n\n")
+      // console.log(req.body.object.customer_details, "\n\n\n\n\n")
+      // console.log(req.body.object.subscription, "\n\n\n\n\new")
       await userModel.findOneAndUpdate(
         { email: req.body.data.object.customer_details.email },
         {
@@ -101,7 +92,7 @@ app.post("/webhook", express.raw({type: 'application/json'}), async (req, res) =
       console.log(`Unhandled event type ${event.type}.`);
   }
 
-  res.status(200);
+  res.status(200).end();
 });
 
 
@@ -110,10 +101,10 @@ app.use(routes);
 
 mongoConnection();
 
-app.use("/images", express.static(path.join(__dirname, "../client/images")));
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-}
+// app.use("/images", express.static(path.join(__dirname, "../client/images")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../client/build")));
+// }
 
 app.post("/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
@@ -125,17 +116,17 @@ app.post("/checkout", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: "https://fp-test-deployment.herokuapp.com/success",
+    success_url: "http://localhost:3000/success",
     success_url:
-      "https://fp-test-deployment.herokuapp.com/success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url: "https://fp-test-deployment.herokuapp.com/error",
+      "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
+    cancel_url: "http://localhost:3000/error",
   });
   res.send(session);
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
 app.listen(PORT, () => {
   console.log(`Running on port: ${PORT}!`);
