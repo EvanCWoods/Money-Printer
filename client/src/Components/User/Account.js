@@ -44,6 +44,22 @@ function Account() {
                   <p className="endpoint-title">GET current BTC data</p>
                   <p className="endpoint">https://evan-woods-final-project.herokuapp.com/api/current/btc</p>
                 </div>
+                <div className="endpoint-container">
+                  <p className="endpoint-title">GET all ETH data</p>
+                  <p className="endpoint">https://evan-woods-final-project.herokuapp.com/api/all/eth</p>
+                </div>
+                <div className="endpoint-container">
+                  <p className="endpoint-title">GET current ETH data</p>
+                  <p className="endpoint">https://evan-woods-final-project.herokuapp.com/api/current/eth</p>
+                </div>
+                <div className="endpoint-container">
+                  <p className="endpoint-title">GET all BNB data</p>
+                  <p className="endpoint">https://evan-woods-final-project.herokuapp.com/api/all/bnb</p>
+                </div>
+                <div className="endpoint-container">
+                  <p className="endpoint-title">GET current BNB data</p>
+                  <p className="endpoint">https://evan-woods-final-project.herokuapp.com/api/current/bnb</p>
+                </div>
               </div>
         </div>
       </div>
