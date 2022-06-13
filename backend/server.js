@@ -116,10 +116,10 @@ app.post("/checkout", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: "http://localhost:3000/success",
+    success_url: "https://fp-test-deployment.herokuapp.com//success",
     success_url:
-      "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
-    cancel_url: "http://localhost:3000/error",
+      "https://fp-test-deployment.herokuapp.com//success?session_id={CHECKOUT_SESSION_ID}",
+    cancel_url: "https://fp-test-deployment.herokuapp.com//error",
   });
   res.send(session);
 });
