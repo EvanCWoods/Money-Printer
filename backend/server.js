@@ -101,10 +101,10 @@ app.use(routes);
 
 mongoConnection();
 
-// app.use("/images", express.static(path.join(__dirname, "../client/images")));
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "../client/build")));
-// }
+app.use("/images", express.static(path.join(__dirname, "../client/images")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+}
 
 app.post("/checkout", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
@@ -124,9 +124,9 @@ app.post("/checkout", async (req, res) => {
   res.send(session);
 });
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
 app.listen(PORT, () => {
   console.log(`Running on port: ${PORT}!`);
