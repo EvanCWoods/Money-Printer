@@ -32,7 +32,7 @@ def getSchemas(schema):
 # FUNCTION TO PERFORM ANALYSIS ON THE DATA FORM EACH SCHEMA
     # RETURN AN OBJECT WITH TIMESTAMP, AVERAGES, TICKER, PRICE, BUY/SELL ETC.
 def analysis():
-    data = list(getSchemas("live").find().sort("timestamp", 1))    # FOR EACH SCHEMA, GET THE DATA IN ASCENDING TIME ORDER
+    data = list(getSchemas("binance").find().sort("timestamp", 1))    # FOR EACH SCHEMA, GET THE DATA IN ASCENDING TIME ORDER
     timeframes = [200, 100, 50, 20, 10]
     # LOOP THROUGH AND ISOLATE THE CLOSING PRICE
     prices = []
@@ -87,7 +87,7 @@ def analysis():
 
     n = 201
     forDb = []
-    ticker = "BTC"
+    ticker = "BNB"
     
     while n < len(prices):
         forDb.append(
@@ -139,7 +139,7 @@ def main():
     cluster = MongoClient(RAW_MONGO_URI,
             ssl_cert_reqs=ssl.CERT_NONE)
     db = cluster["algorithm"]
-    schema = db["bitcoin"]
+    schema = db["binance"]
     data = analysis()
     schema.insert_many(data)
 

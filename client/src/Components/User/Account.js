@@ -12,7 +12,7 @@ function Account() {
   return (
     <div className="account-container">
       <div className="account-details-container">
-        <Header top={`Hi, ${userData?.firstName.charAt(0).toUpperCase()}`} />
+        <Header top={`Hi, ${userData?.firstName}`} />
         <div className="api-container">
           <p className="api-title">
             Here is your API key. <br></br> Ensure that you keep this safe and treat it as
