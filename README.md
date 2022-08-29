@@ -76,6 +76,7 @@ npm run develop
 Once installed and running using the above commands, open the local app in your browser.
 
 The app is deployed on Heroku and acceessable here: https://evan-woods-final-project.herokuapp.com/
+The API is also being hosted on RapidAPI: https://rapidapi.com/EvanCWoods/api/hourly-market-data/
 
 
 ## Contribute
