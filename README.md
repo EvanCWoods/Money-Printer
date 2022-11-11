@@ -93,3 +93,7 @@ For any questions about the code please see my github for source code, email me 
 * https://github.com/EvanCWoods
 * evan.woods.dev@gmail.com
 * https://evan-woods-updated-portfolio.herokuapp.com/
+
+
+## Current Developments
+The original project is hosted on Heroku, with worker scripts and the app iteslf reliant on their service. This makes the app have high latency ( > 6 seconds). I am now in the process of migrating everything over to microsoft Azure to have the service hosted in Australia for low latency.
